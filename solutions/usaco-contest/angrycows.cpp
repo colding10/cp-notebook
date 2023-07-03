@@ -16,9 +16,7 @@
 #include <random>
 #include <set>
 #include <vector>
-
 using namespace std;
-
 //
 // Basic Types
 //
@@ -95,7 +93,6 @@ tcT > int upb(V<T> &a, const T &b) {
 //
 // Consts
 //
-
 const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
@@ -117,27 +114,54 @@ void setIO(const str &s = "") {
 }
 } // namespace FileIO
 
-int N;
-vector<int> apples;
+int N, K;
+vector<int> bales;
 
-ll recurse(int i, ll a, ll b) {
-    if (i == N) {
-        return abs(a - b);
+bool works(ll r) {
+    ll bombed_up_to = -1;
+    ll cows_left = K;
+
+    for (auto &b : bales) {
+        if (bombed_up_to >= b) {
+            continue;
+        }
+
+        if (cows_left == 0) {
+            return false;
+        }
+
+        bombed_up_to = b + 2 * r;
+        cows_left--;
     }
 
-    return min(recurse(i + 1, a + apples[i], b),
-               recurse(i + 1, a, b + apples[i]));
+    return true;
 }
-int main() {
-    setIO();
 
-    cin >> N;
-    apples.rsz(N);
-    for (auto &x : apples) {
+int main() {
+    setIO("angry");
+
+    cin >> N >> K;
+    bales.rsz(N);
+    for (auto &x : bales) {
         cin >> x;
     }
+    sort(all(bales));
 
-    cout << recurse(0, 0, 0) << endl;
+    ll lo = 1;
+    ll hi = BIG;
+    ll res = -1;
+
+    while (lo <= hi) {
+        ll mid = (lo + hi) / 2;
+        if (works(mid)) {
+            res = mid;
+            hi = mid - 1;
+        } else {
+            lo = mid + 1;
+        }
+    }
+
+    cout << res << endl;
     // you should actually read the stuff at the bottom
 }
 
