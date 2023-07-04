@@ -1,5 +1,8 @@
 # cp-notebook
 
+![GitHub repo size](https://img.shields.io/github/repo-size/colding10/cp-notebook?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/colding10/cp-notebook?style=for-the-badge)
+
 This repo is a collection of:
   - my templates (C++) for coding contests
   - solutions to various online judge problems
