@@ -17,6 +17,14 @@ using pll = pair<ll, ll>;
 #define R0F(i,a) ROF(i,0,a)
 #define rep(a) F0R(_,a)
 
+void solve() {
+
+}
+
 int main() {
-    
+    int t;
+    cin >> t;
+    rep(t) {
+        solve();
+    }
 }
