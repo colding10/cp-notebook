@@ -5,6 +5,7 @@
 
 ```bash
 .
+├── LICENSE
 ├── README.md
 ├── nvim-plugin
 │   ├── lua
@@ -12,55 +13,43 @@
 │   │       └── init.lua
 │   └── plugin
 │       └── algo-ds.vim
+├── solutions
+│   ├── codeforces
+│   ├── cses.fi
+│   ├── other
+│   │   ├── indigo-code-2023
+│   │   └── taco-2023
+│   ├── usaco-contest
+│   │   ├── 2015-2016
+│   │   ├── 2016-2017
+│   │   ├── 2017-2018
+│   │   ├── 2018-2019
+│   │   ├── 2019-2020
+│   │   ├── 2020-2021
+│   │   ├── 2021-2022
+│   │   ├── 2022-2023
+│   │   ├── Past Contests
+│   │   ├── Real Contests
+│   │   │   ├── 2022 USACO Dec
+│   │   │   ├── 2023 USACO Feb
+│   │   │   ├── 2023 USACO Jan
+│   │   │   └── 2023 USACO Mar
+│   └── usaco-training
+│       ├── 1.2
+│       ├── 1.3
+│       ├── 1.4
+│       ├── 1.5
+│       ├── 1.6
+│       ├── 2.1
+│       ├── 2.2
+│       ├── 2.3
+│       ├── 2.4
 └── templates
     ├── BST
-    │   ├── RedBlackTree.h
-    │   ├── Treap.h
-    │   └── TwoThreeTree.h
     ├── DP
-    │   ├── DP_DivideAndConquer.h
-    │   ├── LiChaoTree.h
-    │   ├── LiChaoTreeDynamic.h
-    │   └── MinQueue.h
     ├── Examples
-    │   ├── BinaryIndexedTree.cpp
-    │   ├── RedBlackTree.cpp
-    │   ├── SegmentTree.cpp
-    │   ├── SparseTable.cpp
-    │   ├── TwoThreeTree.cpp
-    │   ├── WaveletTree.cpp
-    │   └── lca.cpp
     ├── Geometry
-    │   ├── Area.h
-    │   ├── Geometry.h
-    │   ├── GrahamScan.h
-    │   ├── Polygon.h
-    │   └── Rotations.h
     ├── Graphs
-    │   ├── BFS.h
-    │   ├── Bipartite.h
-    │   ├── BlockCutTree.h
-    │   ├── Bridge_CutPoint.h
-    │   ├── CatesianTreeMax.h
-    │   ├── DFS.h
-    │   ├── DFS_SubtreeSize.h
-    │   ├── Dijkstra.h
-    │   ├── DivideAndConquer.h
-    │   ├── EdmondKarp.h
-    │   ├── FindOddCycle.h
-    │   ├── Floyd-Warshall.h
-    │   ├── HLD.h
-    │   ├── HopcroftKarp.h
-    │   ├── Kruskal.h
-    │   ├── LCA.h
-    │   ├── LCA_Binary_Lifting.h
-    │   ├── LCA_Farach_Colton_Bender.h
-    │   ├── MinCostMaxFlow.h
-    │   ├── MinCostMaxFlowMultipleEdges.h
-    │   ├── SCC.h
-    │   ├── TopologicalSort.h
-    │   ├── TwoSAT.h
-    │   └── UnionFind.h
     ├── Main
     │   ├── basic_types.h
     │   ├── ckmin_max.h
@@ -69,82 +58,8 @@
     │   ├── short-template.cpp
     │   └── vector_types.h
     ├── Math
-    │   ├── ArithmeticSeries.h
-    │   ├── BigInteger.h
-    │   ├── BinomialCoefficient.h
-    │   ├── CRT.h
-    │   ├── DiscreteLog.h
-    │   ├── DiscreteLogs.h
-    │   ├── Divisors.h
-    │   ├── Exponentiation.h
-    │   ├── ExtendedEuclid.h
-    │   ├── FFT.h
-    │   ├── Factorial.h
-    │   ├── FastBinomialCoefficient.h
-    │   ├── FloorCeilDivision.h
-    │   ├── Fraction.h
-    │   ├── GeometricSeries.h
-    │   ├── InverseModPrime.h
-    │   ├── IsPrime.h
-    │   ├── LinearDiophantine.h
-    │   ├── Matrix.h
-    │   ├── Matrix2.h
-    │   ├── MatrixStrassen.h
-    │   ├── MatrixTransition.h
-    │   ├── MillerRabin.h
-    │   ├── MillerRabin64.h
-    │   ├── Modular.h
-    │   ├── MontgomeryModular.h
-    │   ├── NegativeBase.h
-    │   ├── NevilleInterpolation.h
-    │   ├── NevilleInterpolationPolynomial.h
-    │   ├── Polynomial.h
-    │   ├── PowerSums.h
-    │   ├── PrimeLargest.h
-    │   ├── Primes.h
-    │   ├── RankBitset.h
-    │   ├── Rho.h
-    │   ├── SlowPolynomial.h
-    │   ├── SquareRoot.h
-    │   ├── SternBrocotSmallestBetween.h
-    │   ├── Stirling2nd.h
-    │   ├── Totient.h
-    │   ├── TotientSieve.h
-    │   └── moebius.h
     ├── Other
-    │   ├── Bitset.h
-    │   ├── MonotoneStorage.h
-    │   ├── SegmentSet.h
-    │   ├── TwoColorPartition.h
-    │   └── VeniceSet.h
     ├── RangeQuery
-    │   ├── BIT.h
-    │   ├── BIT_Range_Updates.h
-    │   ├── HashingSegmentTree.h
-    │   ├── ImplicitSegmentTree.h
-    │   ├── MaxPrefixSegmentTree.h
-    │   ├── PersistentSegmentTree.h
-    │   ├── RMQ.h
-    │   ├── SegmentTreeAbstract.h
-    │   ├── SegmentTreeDynamic.h
-    │   ├── SegmentTreeMin.h
-    │   ├── SegmentTreeRec.h
-    │   ├── SegmentTreeRecLazyLinearFunktion.h
-    │   ├── SegmentTreeRecLazyMin.h
-    │   ├── SegmentTreeRecLazySum.h
-    │   ├── SegmentTreeSum.h
-    │   ├── SparseTable.h
-    │   └── WaveletTree.h
     ├── Strings
-    │   ├── AhoCorasick.h
-    │   ├── DeBruijn.h
-    │   ├── Hashing.h
-    │   ├── HashingMult.h
-    │   ├── PrefixAutomaton.h
-    │   └── SuffixArray.h
     └── Trie
-        ├── BinaryTrie.h
-        ├── PersistentBinaryCountTrie.h
-        ├── PersistentStringTrie.h
-        └── StringTrie.h
 ```
