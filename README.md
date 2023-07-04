@@ -1,5 +1,15 @@
 # cp-notebook
 
+This repo is a collection of:
+  - my templates (C++) for coding contests
+  - solutions to various online judge problems
+  - and a handy neovim plugin to search for a template and paste it
+
+I will also be adding tools, resources, and such as I find and use them.
+
+### How to use the plugin
+
+Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with a package manager of your choice.
 
 ### Project structure
 
@@ -20,20 +30,6 @@
 │   │   ├── indigo-code-2023
 │   │   └── taco-2023
 │   ├── usaco-contest
-│   │   ├── 2015-2016
-│   │   ├── 2016-2017
-│   │   ├── 2017-2018
-│   │   ├── 2018-2019
-│   │   ├── 2019-2020
-│   │   ├── 2020-2021
-│   │   ├── 2021-2022
-│   │   ├── 2022-2023
-│   │   ├── Past Contests
-│   │   ├── Real Contests
-│   │   │   ├── 2022 USACO Dec
-│   │   │   ├── 2023 USACO Feb
-│   │   │   ├── 2023 USACO Jan
-│   │   │   └── 2023 USACO Mar
 │   └── usaco-training
 │       ├── 1.2
 │       ├── 1.3
