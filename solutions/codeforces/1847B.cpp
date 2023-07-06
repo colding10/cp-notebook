@@ -18,26 +18,17 @@ using pll = pair<ll, ll>;
 #define rep(a) F0R(_, a)
 
 void solve() {
-    int n;
+    int n, ans = 0, sum = numeric_limits<int>::max();
     cin >> n;
-    vector<int> vamp(n);
-    for (int &x : vamp) {
-        cin >> x;
-    }
-
-    int min_stength = *min_element(vamp.begin(), vamp.end());
-
-    int group_count = -1;
-    int strength_sum = 0;
-
-    FOR(i, 0, n) {
-        if ((vamp[i] & min_stength) == min_stength) {
-            group_count++;
+    for (int i = 0, ai; i < n; i += 1) {
+        cin >> ai;
+        sum &= ai;
+        if (sum == 0) {
+            ans += 1;
+            sum = numeric_limits<int>::max();
         }
-        strength_sum += vamp[i];
     }
-
-    cout << group_count << endl;
+    cout << max(ans, 1) << "\n";
 }
 
 int main() {
