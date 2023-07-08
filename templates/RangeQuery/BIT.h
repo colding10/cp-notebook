@@ -1,7 +1,7 @@
 #include <vector>
 
 template <typename T = long long> class BIT {
-    // Implementation of a Binary Indexed Tree (Fennwick Tree)
+    // Implementation of a Binary Indexed Tree (Fenwick Tree)
 public:
     BIT(int n) : n(n + 1) {
         m_array = std::vector<T>(this->n, 0);
