@@ -1,22 +1,4 @@
-#include <algorithm>
-#include <array>
-#include <bitset>
-#include <cassert>
-#include <chrono>
-#include <climits>
-#include <cmath>
-#include <complex>
-#include <cstring>
-#include <functional>
-#include <iomanip>
-#include <iostream>
-#include <map>
-#include <numeric>
-#include <queue>
-#include <random>
-#include <set>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 using ll = long long;
@@ -77,6 +59,9 @@ template <class T> bool ckmax(T &a, T &b) {
 #define R0F(i, a) ROF(i, 0, a)
 #define rep(a) F0R(_, a)
 #define each(a, x) for (auto &a : x)
+
+const int INF_32=int(2147483647);
+const ll INF_64=ll(9223372036854775807);
 
 const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
