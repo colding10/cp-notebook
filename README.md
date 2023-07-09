@@ -19,26 +19,29 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 ```bash
 .
 ├── LICENSE
-├── README.md
-├── nvim-plugin
+├── README.md                     [file you're reading right now]
+│
+├── nvim-plugin                   [the nvim plugin]
 │   ├── lua
 │   │   └── algo-ds
 │   │       └── init.lua
 │   └── plugin
 │       └── algo-ds.vim
+│
 ├── solutions                     [solutions to various online judges]
 │   │
 │   ├── codeforces                all of my codeforces solutions
 │   ├── cses.fi                   all of my cses solutions
 │   ├── usaco-contest             usaco solutions (needs organizing)
 │   └── usaco-training            usaco training (needs organizing)
+│
 └── templates                     [where i keep my templates]
     ├── BST
     ├── DP
     ├── Examples
     ├── Geometry
     ├── Graphs
-    ├── Main
+    ├── Main                      [the basic templates (i dont use one these days)]
     │   ├── basic_types.h
     │   ├── ckmin_max.h
     │   ├── long-template.cpp
