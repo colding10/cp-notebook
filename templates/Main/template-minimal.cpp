@@ -3,7 +3,7 @@ using namespace std;
 using vi = vector<int>;
 using pi = pair<int, int>;
 using ll = long long;
-using vll = vector<ll, ll>;
+using vll = vector<ll>;
 using pll = pair<ll, ll>;
 
 #define mp make_pair
