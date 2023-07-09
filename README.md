@@ -3,9 +3,10 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/colding10/cp-notebook?style=for-the-badge)
 
 This repo is a collection of:
-  - my templates (C++) for coding contests
-  - solutions to various online judge problems
-  - and a handy neovim plugin to search for a template and paste it
+
+- my templates (C++) for coding contests
+- solutions to various online judge problems
+- and a handy neovim plugin to search for a template and paste it
 
 I will also be adding tools, resources, and such as I find and use them.
 
@@ -25,24 +26,13 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 │   │       └── init.lua
 │   └── plugin
 │       └── algo-ds.vim
-├── solutions
-│   ├── codeforces
-│   ├── cses.fi
-│   ├── other
-│   │   ├── indigo-code-2023
-│   │   └── taco-2023
-│   ├── usaco-contest
-│   └── usaco-training
-│       ├── 1.2
-│       ├── 1.3
-│       ├── 1.4
-│       ├── 1.5
-│       ├── 1.6
-│       ├── 2.1
-│       ├── 2.2
-│       ├── 2.3
-│       ├── 2.4
-└── templates
+├── solutions                     [solutions to various online judges]
+│   │
+│   ├── codeforces                all of my codeforces solutions
+│   ├── cses.fi                   all of my cses solutions
+│   ├── usaco-contest             usaco solutions (needs organizing)
+│   └── usaco-training            usaco training (needs organizing)
+└── templates                     [where i keep my templates]
     ├── BST
     ├── DP
     ├── Examples
