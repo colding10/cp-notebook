@@ -21,17 +21,17 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 ├── LICENSE
 ├── README.md
 ├── nvim-plugin
-│   ├── lua
-│   │   └── algo-ds
-│   │       └── init.lua
-│   └── plugin
-│       └── algo-ds.vim
+│   ├── lua
+│   │   └── algo-ds
+│   │       └── init.lua
+│   └── plugin
+│       └── algo-ds.vim
 ├── solutions                     [solutions to various online judges]
 │   │
-│   ├── codeforces                all of my codeforces solutions
-│   ├── cses.fi                   all of my cses solutions
-│   ├── usaco-contest             usaco solutions (needs organizing)
-│   └── usaco-training            usaco training (needs organizing)
+│   ├── codeforces                all of my codeforces solutions
+│   ├── cses.fi                   all of my cses solutions
+│   ├── usaco-contest             usaco solutions (needs organizing)
+│   └── usaco-training            usaco training (needs organizing)
 └── templates                     [where i keep my templates]
     ├── BST
     ├── DP
@@ -39,12 +39,12 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
     ├── Geometry
     ├── Graphs
     ├── Main
-    │   ├── basic_types.h
-    │   ├── ckmin_max.h
-    │   ├── long-template.cpp
-    │   ├── minimal-template.cpp
-    │   ├── short-template.cpp
-    │   └── vector_types.h
+    │   ├── basic_types.h
+    │   ├── ckmin_max.h
+    │   ├── long-template.cpp
+    │   ├── minimal-template.cpp
+    │   ├── short-template.cpp
+    │   └── vector_types.h
     ├── Math
     ├── Other
     ├── RangeQuery
