@@ -19,12 +19,12 @@ using pll = pair<ll, ll>;
 
 class SegmentTree {
 public:
-    SegmentTree(int count) {
+    SegmentTree(ll count) {
         n = count;
         data.assign(2 * n, 0);
     }
 
-    SegmentTree(std::vector<int> const &values) {
+    SegmentTree(std::vector<ll> const &values) {
         n = values.size();
         data.resize(2 * n);
         std::copy(values.begin(), values.end(), &data[0] + n);
@@ -32,7 +32,7 @@ public:
             data[idx] = data[2 * idx] + data[2 * idx + 1];
     }
 
-    void update(int idx, int value) {
+    void update(ll idx, ll value) {
         idx += n;
         data[idx] = value;
 
@@ -42,7 +42,7 @@ public:
         }
     }
 
-    int sum(int left, int right) { // interval [left, right)
+    ll sum(ll left, ll right) { // interval [left, right)
         ll ret = 0;
         left += n;
         right += n;
@@ -73,7 +73,7 @@ int main() {
     SegmentTree st(a);
 
     rep(q) {
-        int t, a, b;
+        ll t, a, b;
         cin >> t >> a >> b;
         a--;
         if (t == 1) {
