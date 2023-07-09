@@ -16,7 +16,7 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 
 ### Project structure
 
-```bash
+```
 .
 ├── LICENSE
 ├── README.md                     [file you're reading right now]
