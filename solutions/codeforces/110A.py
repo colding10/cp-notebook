@@ -1,8 +1,10 @@
 n = int(input())
 
+
 def is_lucky(n):
     x = set(str(n))
     return x == {"4", "7"} or x == {"4"} or x == {"7"}
+
 
 x = 0
 for d in str(n):

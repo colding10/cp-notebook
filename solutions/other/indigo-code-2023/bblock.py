@@ -14,6 +14,6 @@ while any(heights):
     if block_started:
         ans += 1
     for i in range(n):
-        heights[i]  = max(0, heights[i]- 1)
-        
+        heights[i] = max(0, heights[i] - 1)
+
 print(ans)

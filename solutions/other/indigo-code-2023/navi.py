@@ -1,20 +1,24 @@
 x = 0
 y = 0
 
+
 def x_value(chr, count):
     if chr not in "<>":
         return 0
-    m = {"<":-2,">":2}
+    m = {"<": -2, ">": 2}
     if count < 3:
         return m[chr] * count
-    return m[chr]/2*20 + (m[chr]/2 * 5 * (count-3))
+    return m[chr] / 2 * 20 + (m[chr] / 2 * 5 * (count - 3))
+
+
 def y_value(chr, count):
     if chr not in "v^":
         return 0
-    m = {"v":-2, "^":2}
+    m = {"v": -2, "^": 2}
     if count < 3:
         return m[chr] * count
-    return m[chr]/2*20 + (m[chr]/2 * 5 * (count-3))
+    return m[chr] / 2 * 20 + (m[chr] / 2 * 5 * (count - 3))
+
 
 s = input()
 
@@ -25,7 +29,7 @@ for i, c in enumerate(s):
         tokens.append([c, 1])
     else:
         tokens[-1][1] += 1
-        
+
 del tokens[0]
 for chr, count in tokens:
     x += int(x_value(chr, count))
