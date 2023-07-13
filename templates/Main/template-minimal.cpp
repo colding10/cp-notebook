@@ -20,3 +20,8 @@ using pll = pair<ll, ll>;
 int main() {
     
 }
+
+// keep calm
+// stay organized
+// do something instead of wasting time
+// the solution is probably simpler than you think
