@@ -12,11 +12,8 @@ using pd = pair<db, db>;
 #define f first
 #define s second
 
-#define tcT template <class T
-#define tcTU tcT, class U
-
-tcT > using V = vector<T>;
-tcT, size_t SZ > using AR = array<T, SZ>;
+template <class T> using V = vector<T>;
+template <class T, size_t SZ> using AR = array<T, SZ>;
 
 using vi = V<int>;
 using vb = V<bool>;
