@@ -115,8 +115,25 @@ template <class T, class... U> void decrement(T &t, U &...u) {
 } // namespace Input
 void solve() {
     int n;
-    vi a(n);
-    re(a);
+    cin >> n;
+    int e = 0;
+    int o = 0;
+
+    rep(n) {
+        int x;
+        cin >> x;
+        if (x & 1) {
+            o += x;
+        } else {
+            e += x;
+        }
+    }
+
+    if (e > o) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
+    }
 }
 
 int main() {
