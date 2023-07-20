@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 using vi = vector<int>;
@@ -107,39 +106,18 @@ void solve() {
     int n, m, k;
     cin >> n >> m >> k;
 
-    pi v;
-    cin >> v.f >> v.s;
-    vector<pi> cv;
-
-    F0R(i, 4) {
-        pi ne = mp(v.f + dx[i], v.s + dy[i]);
-        if (ne.f >= 1 && ne.s >= 1 && ne.f <= n && ne.s <= m) {
-            cv.pb(ne);
-        }
-    }
+    int va, vb;
+    cin >> va >> vb;
+    string ans = "YES";
     rep(k) {
-        pi fr;
-        cin >> fr.f >> fr.s;
-
-        F0R(i, 4) {
-            pi ne = mp(fr.f + dx[i], fr.s + dy[i]);
-            if (ne.f >= 1 && ne.s >= 1 && ne.f <= n && ne.s <= m) {
-                auto it = find(all(cv), ne);
-                if (it != cv.end()) {
-                    cv.erase(it);
-                }
-            }
+        int x, y;
+        cin >> x >> y;
+        if (((x + y) % 2) == ((va + vb) % 2)) {
+            ans = "NO";
         }
     }
 
-    if (cv.size()) {
-        for (auto x : cv) {
-            cout << x.f << " " << x.s << endl;
-        }
-        cout << "YES" << endl;
-    } else {
-        cout << "NO" << endl;
-    }
+    cout << ans << endl;
 }
 
 int main() {
