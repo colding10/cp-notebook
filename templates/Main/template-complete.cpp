@@ -96,41 +96,69 @@ template <class A, size_t SZ> void re(AR<A, SZ> &x) {
 }
 }; // namespace ReadIO
 
-inline namespace WriteIO {
-template <class A, class B> void out(P<A, B> &p);
-template <class A> void out(V<A> &v);
-template <class A, size_t S> void out(AR<A, S> &a);
+namespace WriteIO {
+inline namespace WriteIO_impl {
+template <class T> void out_elem(T &x, const string &delimiter = " ") {
+    cout << x << delimiter;
+}
+template <class T> void out_elem(const vector<T> &v, const string &delimiter) {
+    for (size_t i = 0; i < v.size(); ++i) {
+        if (i > 0)
+            cout << delimiter;
+        cout << v[i];
+    }
+}
 
-template <class T> void out(T &x) {
-    cout << x;
+template <class T, size_t SZ>
+void out_elem(const array<T, SZ> &a, const string &delimiter) {
+    for (size_t i = 0; i < SZ; ++i) {
+        if (i > 0)
+            cout << delimiter;
+        cout << a[i];
+    }
 }
-void out(double &d, int pres = 5, str end = "\n") {
+
+} // namespace WriteIO_impl
+
+template <class T> void out(T &x, const str &delimiter = "\n") {
+    WriteIO_impl::out_elem(x, delimiter);
+}
+
+void out(double &d, int pres = 5, const str &end = "\n") {
     cout << setprecision(pres) << d << end;
 }
-void out(long double &d, int pres = 5, str end = "\n") {
+
+void out(long double &d, int pres = 5, const str &end = "\n") {
     cout << setprecision(pres) << d << end;
 }
+
 template <class H, class... T> void out(H &h, T &...t) {
-    out(h);
+    out_elem(h);
     out(t...);
 }
+
 template <class A, class B> void out(P<A, B> &p) {
-    out(p.first, p.second);
-}
-template <class A> void out(V<A> &x) {
-    for (auto &i : x)
-        out(i);
-}
-template <class A, size_t SZ> void out(AR<A, SZ> &x) {
-    for (auto &i : x)
-        out(i);
+    out_elem(p.first);
+    out_elem(p.second);
 }
 
-}; // namespace WriteIO
+template <class A> void out(V<A> &x, const str &delimiter = " ") {
+    out_elem(x, delimiter);
+}
 
+template <class A, size_t SZ>
+void out(AR<A, SZ> &x, const str &delimiter = " ") {
+    out_elem(x, delimiter);
+}
+
+} // namespace WriteIO
 int main() {
     setIO();
-
+    int n;
+    re(n);
+    vi a(n);
+    re(a);
+    cout << reduce(all(a)) << endl;
     // you should actually read the stuff at the bottom
 }
 
