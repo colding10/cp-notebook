@@ -80,6 +80,9 @@ template <class A> void re(V<A> &x) {
 template <class A, size_t SZ> void re(AR<A, SZ> &x) {
     rep(i, 0, SZ) re(x[i]);
 }
+#define ints(...)                                                              \
+  int __VA_ARGS__;                                                             \
+  re(__VA_ARGS__);
 }; // namespace ReadIO
 
 inline namespace WriteIO {
