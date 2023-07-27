@@ -16,48 +16,33 @@ using pll = pair<ll, ll>;
 #define R0F(i, a) ROF(i, 0, a)
 #define rep(a) F0R(_, a)
 
-vll s;
-ll n, c;
-
-bool works(ll x) {
-    ll sum = 0;
-    F0R(i, n) {
-        sum += (s[i] + (2 * x)) * (s[i] + (2 * x));
-    }
-
-    return sum == -c;
-}
-
 void solve() {
+    ll n, c;
     cin >> n >> c;
-
-    double a = 4 * n;
-    double b = 0;
-
-    s.resize(n);
+    vi a(n);
     F0R(i, n) {
-        ll x;
-        cin >> x;
-        s[i] = x;
-
-        c -= x * x;
-        b += 4 * x;
+        cin >> a[i];
     }
-    c *= -1;
 
-    double ans = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
-   cout <<  round(ans) << endl;
-    return;
-    ll sfa = ll(ans);
+    ll l = 1;
+    ll r = 1e9;
 
-    if (works(sfa)) {
-        cout << sfa << endl;
-        return;
-    }
-    for (ll x = sfa - 5; x < sfa + 5; x++) {
-        if (works(x)) {
-            cout << x << endl;
+    while (l <= r) {
+        ll mid = l + (r - l) / 2;
+        ll sumall = 0;
+        F0R(i, n) {
+            sumall += (a[i] + 2 * mid) * (a[i] + 2 * mid);
+            if (sumall > c)
+                break;
+        }
+        if (sumall == c) {
+            cout << mid << "\n";
             return;
+        }
+        if (sumall > c) {
+            r = mid - 1;
+        } else {
+            l = mid + 1;
         }
     }
 }

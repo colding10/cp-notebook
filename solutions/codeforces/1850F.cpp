@@ -20,28 +20,22 @@ using pll = pair<ll, ll>;
 void solve() {
     int n;
     cin >> n;
-    vi a(n+1, 0);
+    vll a(n + 1, 0);
+    vll mx(n + 1, 0);
 
     rep(n) {
         int x;
         cin >> x;
-
-        FOR(i, 1, n+1) {
-            if (x * i > n+1) {
-                break;
-            }
-
-            a[x*i]++;
-        }
+        if (x <= n)
+            a[x]++;
     }
 
-    int m = -1;
-    F0R(i, n+1) {
-        // cout << "a[" << i << "] = " << a[i] << endl;
-        m = max(m, a[i]);
+    for (int i = 1; i <= n; ++i) {
+        for (int j = i; j <= n; j += i)
+            mx[j] += a[i];
     }
 
-    cout << m << endl;
+    cout << *max_element(begin(mx), end(mx)) << endl;
 }
 
 int main() {
