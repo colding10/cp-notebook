@@ -19,13 +19,11 @@ using pll = pair<ll, ll>;
 
 #define INT_SIZE 32
 
-// A Trie Node
 struct TrieNode {
     int value; // Only used in leaf nodes
     TrieNode *arr[2];
 };
 
-// Utility function tp create a Trie node
 TrieNode *newNode() {
     TrieNode *temp = new TrieNode;
     temp->value = 0;
@@ -33,24 +31,18 @@ TrieNode *newNode() {
     return temp;
 }
 
-// Inserts pre_xor to trie with given root
 void insert(TrieNode *root, int pre_xor) {
     TrieNode *temp = root;
 
-    // Start from the msb, insert all bits of
-    // pre_xor into Trie
     for (int i = INT_SIZE - 1; i >= 0; i--) {
-        // Find current bit in given prefix
         bool val = pre_xor & (1 << i);
 
-        // Create a new node if needed
         if (temp->arr[val] == NULL)
             temp->arr[val] = newNode();
 
         temp = temp->arr[val];
     }
 
-    // Store value at leaf node
     temp->value = pre_xor;
 }
 
