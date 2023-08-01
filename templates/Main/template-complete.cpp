@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -36,80 +35,64 @@ using vpll = V<pll>;
        i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
-    cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+  cin.tie(0)->sync_with_stdio(0);
+  if (sz(s)) {
+    setIn(s + ".in"), setOut(s + ".out");
+  }
 }
 } // namespace FileIO
 
-inline namespace ReadIO {
-template <class A, class B> void re(P<A, B> &p);
-template <class A> void re(V<A> &v);
-template <class A, size_t SZ> void re(AR<A, SZ> &a);
+void __print(int x) { cerr << x; }
+void __print(long x) { cerr << x; }
+void __print(long long x) { cerr << x; }
+void __print(unsigned x) { cerr << x; }
+void __print(unsigned long x) { cerr << x; }
+void __print(unsigned long long x) { cerr << x; }
+void __print(float x) { cerr << x; }
+void __print(double x) { cerr << x; }
+void __print(long double x) { cerr << x; }
+void __print(char x) { cerr << '\'' << x << '\''; }
+void __print(const char *x) { cerr << '\"' << x << '\"'; }
+void __print(const string &x) { cerr << '\"' << x << '\"'; }
+void __print(bool x) { cerr << (x ? "true" : "false"); }
 
-template <class T> void re(T &x) {
-    cin >> x;
+template <typename T, typename V> void __print(const pair<T, V> &x) {
+  cerr << '{';
+  __print(x.first);
+  cerr << ", ";
+  __print(x.second);
+  cerr << '}';
 }
-void re(double &d) {
-    string t;
-    re(t);
-    d = stod(t);
+template <typename T> void __print(const T &x) {
+  int f = 0;
+  cerr << '{';
+  for (auto &i : x)
+    cerr << (f++ ? ", " : ""), __print(i);
+  cerr << "}";
 }
-void re(long double &d) {
-    string t;
-    re(t);
-    d = stold(t);
+void _print() { cerr << "]\n"; }
+template <typename T, typename... V> void _print(T t, V... v) {
+  __print(t);
+  if (sizeof...(v))
+    cerr << ", ";
+  _print(v...);
 }
-template <class H, class... T> void re(H &h, T &...t) {
-    re(h);
-    re(t...);
-}
-template <class A, class B> void re(P<A, B> &p) {
-    re(p.first, p.second);
-}
-template <class A> void re(V<A> &x) {
-    rep(i, 0, sz(x)) re(x[i]);
-}
-template <class A, size_t SZ> void re(AR<A, SZ> &x) {
-    rep(i, 0, SZ) re(x[i]);
-}
-#define ints(...)                                                              \
-  int __VA_ARGS__;                                                             \
-  re(__VA_ARGS__);
-}; // namespace ReadIO
 
-inline namespace WriteIO {
-template <class A, class B> void out(P<A, B> &p);
-template <class A> void out(V<A> &v);
-template <class A, size_t S> void out(AR<A, S> &a);
-
-template <class T> void out(T &x) {
-    cout << x;
-}
-template <class H, class... T> void out(H &h, T &...t) {
-    out(h);
-    out(t...);
-}
-template <class A, class B> void out(P<A, B> &p) {
-    out(p.first, " ", p.second);
-}
-template <class A> void out(V<A> &x) {
-    rep(i, 0, sz(x)) out(x[i], " \n"[x == sz(x) - 1]);
-}
-template <class A, size_t SZ> void out(AR<A, SZ> &x) {
-    rep(i, 0, SZ) out(x[i], " \n"[x == SZ - 1]);
-}
-}; // namespace WriteIO
+#ifndef ONLINE_JUDGE
+#define dbg(x...)                                                              \
+  cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = [";    \
+  _print(x);                                                                   \
+  cerr << "\e[39m" << endl;
+#else
+#define dbg(x...)
+#endif
 
 int main() {
     setIO();
+
     // you should actually read the stuff at the bottom
 }
 
