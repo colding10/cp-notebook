@@ -69,9 +69,7 @@ int query(TrieNode *root, int pre_xor) {
     return pre_xor ^ (temp->value);
 }
 
-// Returns maximum XOR value of a subarray in arr[0..n-1]
 int maxSubarrayXOR(vector<int> &arr, int n) {
-    // Create a Trie and insert 0 into it
     TrieNode *root = newNode();
     insert(root, 0);
 
