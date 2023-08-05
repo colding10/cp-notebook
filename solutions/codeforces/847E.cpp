@@ -75,12 +75,8 @@ using vpd = V<pd>;
 
 #define lb lower_bound
 #define ub upper_bound
-tcT > int lwb(V<T> &a, const T &b) {
-    return int(lb(all(a), b) - bg(a));
-}
-tcT > int upb(V<T> &a, const T &b) {
-    return int(ub(all(a), b) - bg(a));
-}
+tcT > int lwb(V<T> &a, const T &b) { return int(lb(all(a), b) - bg(a)); }
+tcT > int upb(V<T> &a, const T &b) { return int(ub(all(a), b) - bg(a)); }
 
 //
 // Loops
@@ -100,20 +96,15 @@ const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1}; // for every grid problem!!
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -142,7 +133,7 @@ bool works(int t, vector<int> &packmen, deque<int> stars) {
             int right_free_time = t - 2 * left_time;
             int left_first = -1;
             while (left_first + 1 < stars.size() &&
-                    stars[left_first + 1] - p <= right_free_time) {
+                   stars[left_first + 1] - p <= right_free_time) {
                 left_first++;
             }
 
@@ -150,7 +141,7 @@ bool works(int t, vector<int> &packmen, deque<int> stars) {
             right_free_time = t - left_time;
             int right_first = -1;
             while (right_first + 1 < stars.size() &&
-                    (stars[right_first + 1] - p) * 2 <= right_free_time) {
+                   (stars[right_first + 1] - p) * 2 <= right_free_time) {
                 right_first++;
             }
 

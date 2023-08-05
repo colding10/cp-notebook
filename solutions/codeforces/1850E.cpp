@@ -20,9 +20,7 @@ void solve() {
     ll n, c;
     cin >> n >> c;
     vi a(n);
-    F0R(i, n) {
-        cin >> a[i];
-    }
+    F0R(i, n) { cin >> a[i]; }
 
     ll l = 1;
     ll r = 1e9;
@@ -32,8 +30,7 @@ void solve() {
         ll sumall = 0;
         F0R(i, n) {
             sumall += (a[i] + 2 * mid) * (a[i] + 2 * mid);
-            if (sumall > c)
-                break;
+            if (sumall > c) break;
         }
         if (sumall == c) {
             cout << mid << "\n";

@@ -32,63 +32,32 @@ using vpll = V<pll>;
 #define eb emplace_back
 
 #define rep(i, begin, end)                                                     \
-  for (__typeof(end) i = (begin) - ((begin) > (end));                          \
-       i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+    for (__typeof(end) i = (begin) - ((begin) > (end));                        \
+         i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
 inline namespace Debug {
-void __print(int x) {
-    cerr << x;
-}
-void __print(long x) {
-    cerr << x;
-}
-void __print(long long x) {
-    cerr << x;
-}
-void __print(unsigned x) {
-    cerr << x;
-}
-void __print(unsigned long x) {
-    cerr << x;
-}
-void __print(unsigned long long x) {
-    cerr << x;
-}
-void __print(float x) {
-    cerr << x;
-}
-void __print(double x) {
-    cerr << x;
-}
-void __print(long double x) {
-    cerr << x;
-}
-void __print(char x) {
-    cerr << '\'' << x << '\'';
-}
-void __print(const char *x) {
-    cerr << '\"' << x << '\"';
-}
-void __print(const string &x) {
-    cerr << '\"' << x << '\"';
-}
-void __print(bool x) {
-    cerr << (x ? "true" : "false");
-}
+void __print(int x) { cerr << x; }
+void __print(long x) { cerr << x; }
+void __print(long long x) { cerr << x; }
+void __print(unsigned x) { cerr << x; }
+void __print(unsigned long x) { cerr << x; }
+void __print(unsigned long long x) { cerr << x; }
+void __print(float x) { cerr << x; }
+void __print(double x) { cerr << x; }
+void __print(long double x) { cerr << x; }
+void __print(char x) { cerr << '\'' << x << '\''; }
+void __print(const char *x) { cerr << '\"' << x << '\"'; }
+void __print(const string &x) { cerr << '\"' << x << '\"'; }
+void __print(bool x) { cerr << (x ? "true" : "false"); }
 
 template <typename T, typename V> void __print(const pair<T, V> &x) {
     cerr << '{';
@@ -104,21 +73,18 @@ template <typename T> void __print(const T &x) {
         cerr << (f++ ? ", " : ""), __print(i);
     cerr << "}";
 }
-void _print() {
-    cerr << "]\n";
-}
+void _print() { cerr << "]\n"; }
 template <typename T, typename... V> void _print(T t, V... v) {
     __print(t);
-    if (sizeof...(v))
-        cerr << ", ";
+    if (sizeof...(v)) cerr << ", ";
     _print(v...);
 }
 
 #ifndef ONLINE_JUDGE
 #define dbg(x...)                                                              \
-  cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = [";    \
-  _print(x);                                                                   \
-  cerr << "\e[39m" << endl;
+    cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = [";  \
+    _print(x);                                                                 \
+    cerr << "\e[39m" << endl;
 #else
 #define dbg(x...)
 #endif
@@ -140,9 +106,7 @@ void solve() {
     vi ord(n);
     iota(all(ord), 0);
 
-    stable_sort(all(ord), [&](int i, int j) {
-        return a[i] > a[j];
-    });
+    stable_sort(all(ord), [&](int i, int j) { return a[i] > a[j]; });
 
     rep(i, 0, n) {
         cout << ord[i] + 1 << ' ';

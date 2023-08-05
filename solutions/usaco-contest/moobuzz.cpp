@@ -104,8 +104,7 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -114,7 +113,7 @@ int main() {
     ll x;
     cin >> x;
     vector<int> stor = {1, 2, 4, 7, 8, 11, 13, 14};
-    cout << stor[(x % 8) - 1] + 15 * (x / 8)  - (x % 8 == 0 ? 1 : 0) << endl;
+    cout << stor[(x % 8) - 1] + 15 * (x / 8) - (x % 8 == 0 ? 1 : 0) << endl;
     // you should actually read the stuff at the bottom
 }
 

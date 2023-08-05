@@ -21,9 +21,7 @@ void solve() {
     int n;
     cin >> n;
     vi a(n);
-    F0R(i, n) {
-        cin >> a[i];
-    }
+    F0R(i, n) { cin >> a[i]; }
     vi b(a);
     sort(b.begin(), b.end());
 

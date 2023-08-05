@@ -19,7 +19,7 @@ using pll = pair<ll, ll>;
 #define rep(a) F0R(_, a)
 
 class SegmentTree {
-public:
+  public:
     SegmentTree(int count) {
         n = count;
         data.assign(2 * n, 0);
@@ -49,17 +49,15 @@ public:
         right += n;
 
         while (left < right) {
-            if (left & 1)
-                ret = std::min(ret, data[left++]);
-            if (right & 1)
-                ret = std::min(ret, data[--right]);
+            if (left & 1) ret = std::min(ret, data[left++]);
+            if (right & 1) ret = std::min(ret, data[--right]);
             left >>= 1;
             right >>= 1;
         }
         return ret;
     }
 
-private:
+  private:
     int n;
     std::vector<int> data;
 };

@@ -30,13 +30,11 @@ void addcontroller(int i, int j) {
 
     /* record the fact that controllers of i now control j */
     for (k = 0; k < NCOM; k++)
-        if (controls[k][i])
-            addcontroller(k, j);
+        if (controls[k][i]) addcontroller(k, j);
 
     /* if i now controls more companies, record that fact */
     for (k = 0; k < NCOM; k++)
-        if (owns[i][k] > 50)
-            addcontroller(i, k);
+        if (owns[i][k] > 50) addcontroller(i, k);
 }
 
 /* update info: i owns p% of j */
@@ -45,13 +43,11 @@ void addowner(int i, int j, int p) {
 
     /* add p% of j to each controller of i */
     for (k = 0; k < NCOM; k++)
-        if (controls[k][i])
-            owns[k][j] += p;
+        if (controls[k][i]) owns[k][j] += p;
 
     /* look for new controllers of j */
     for (k = 0; k < NCOM; k++)
-        if (owns[k][j] > 50)
-            addcontroller(k, j);
+        if (owns[k][j] > 50) addcontroller(k, j);
 }
 
 int main(void) {
@@ -73,7 +69,6 @@ int main(void) {
 
     for (i = 0; i < NCOM; i++)
         for (j = 0; j < NCOM; j++)
-            if (i != j && controls[i][j])
-                fprintf(fout, "%d %d\n", i, j);
+            if (i != j && controls[i][j]) fprintf(fout, "%d %d\n", i, j);
     exit(0);
 }

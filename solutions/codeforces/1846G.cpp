@@ -30,8 +30,7 @@ dijkstra(std::vector<std::vector<std::pair<int, long long>>> const &adj,
         pq.pop();
         long long c = -x.first;
         int v = x.second;
-        if (c > cost[v])
-            continue;
+        if (c > cost[v]) continue;
         cost[v] = c;
         for (auto next : adj[v]) {
             if (cost[next.first] == -1 || cost[next.first] > c + next.second) {
@@ -82,8 +81,7 @@ void solve() {
         }
     }
 
-    if (cost[0] == INT_MAX)
-        cost[0] = -1;
+    if (cost[0] == INT_MAX) cost[0] = -1;
     cout << cost[0] << endl;
 }
 

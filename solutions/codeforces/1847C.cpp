@@ -37,8 +37,7 @@ void insert(TrieNode *root, int pre_xor) {
     for (int i = INT_SIZE - 1; i >= 0; i--) {
         bool val = pre_xor & (1 << i);
 
-        if (temp->arr[val] == NULL)
-            temp->arr[val] = newNode();
+        if (temp->arr[val] == NULL) temp->arr[val] = newNode();
 
         temp = temp->arr[val];
     }
@@ -58,8 +57,7 @@ int query(TrieNode *root, int pre_xor) {
 
         // Traverse Trie, first look for a
         // prefix that has opposite bit
-        if (temp->arr[1 - val] != NULL)
-            temp = temp->arr[1 - val];
+        if (temp->arr[1 - val] != NULL) temp = temp->arr[1 - val];
 
         // If there is no prefix with opposite
         // bit, then look for same bit.

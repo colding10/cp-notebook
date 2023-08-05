@@ -4,7 +4,7 @@
 
 class BIT {
     // Implementation of a Binary Indexed Tree (Fennwick Tree)
-public:
+  public:
     /*BIT(std::vector<int> list) {
             // Initialize BIT with list in O(n*log(n))
             m_array = std::vector<int>(list.size() + 1, 0);
@@ -52,7 +52,7 @@ public:
         }
     }
 
-private:
+  private:
     std::vector<int> m_array;
 };
 
@@ -70,8 +70,8 @@ void print(BIT const &bit, int length) {
               << std::endl;
     std::cout << "Prefix sum of first 7 elements: \t" << bit.prefix_query(6)
               << std::endl;
-    std::cout << "Range sum from index 1 to index 5: \t" << bit.range_query(1, 5)
-              << std::endl;
+    std::cout << "Range sum from index 1 to index 5: \t"
+              << bit.range_query(1, 5) << std::endl;
     std::cout << std::endl;
 }
 

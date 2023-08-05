@@ -92,7 +92,7 @@ tcT > int upb(V<T> &a, const T &b) { return int(ub(all(a), b) - bg(a)); }
 // Consts
 //
 
-const int INF = (int)2*10e9;
+const int INF = (int)2 * 10e9;
 const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
@@ -105,17 +105,16 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
 struct bbox {
-	int ax;
-	int ay;
+    int ax;
+    int ay;
 
-	int bx;
-	int by;
+    int bx;
+    int by;
 };
 
 #define MAXN 100005
@@ -125,47 +124,49 @@ bool visited[MAXN];
 vector<pi> cows;
 vector<int> adj[MAXN];
 
-void ff(int cow, bbox& b) {
-	if (visited[cow]) return;
-	visited[cow] = true;
+void ff(int cow, bbox &b) {
+    if (visited[cow]) return;
+    visited[cow] = true;
 
-	b.ax = min(b.ax, cows[cow].f);
-	b.bx = max(b.bx, cows[cow].f);
-	b.ay = min(b.ay, cows[cow].s);
-	b.by = max(b.by, cows[cow].s);
+    b.ax = min(b.ax, cows[cow].f);
+    b.bx = max(b.bx, cows[cow].f);
+    b.ay = min(b.ay, cows[cow].s);
+    b.by = max(b.by, cows[cow].s);
 
-	for (int x : adj[cow]) {
-		ff(x, b);
-	}
+    for (int x : adj[cow]) {
+        ff(x, b);
+    }
 }
 
 int main() {
     setIO("fenceplan");
 
-	cin >> N >> M;
-	cows.rsz(N);
+    cin >> N >> M;
+    cows.rsz(N);
 
-	for (auto& x : cows) { cin >> x.first >> x.second; }
+    for (auto &x : cows) {
+        cin >> x.first >> x.second;
+    }
 
-	rep(M) {
-		int a, b;
-		cin >> a >> b;
-		a--;
-		b--;
-		adj[a].pb(b);
-		adj[b].pb(a);
-	}
+    rep(M) {
+        int a, b;
+        cin >> a >> b;
+        a--;
+        b--;
+        adj[a].pb(b);
+        adj[b].pb(a);
+    }
 
-	int best = 999999999;
-	F0R(i, N) {
-		if (visited[i]) continue;
-		bbox res = {999999999, 999999999, 0, 0};
-		ff(i, res);
-		int r = 2 * ((res.bx - res.ax) + (res.by - res.ay));
-		best = min(best, r);
-	}
+    int best = 999999999;
+    F0R(i, N) {
+        if (visited[i]) continue;
+        bbox res = {999999999, 999999999, 0, 0};
+        ff(i, res);
+        int r = 2 * ((res.bx - res.ax) + (res.by - res.ay));
+        best = min(best, r);
+    }
 
-	cout << best << endl;
+    cout << best << endl;
     // you should actually read the stuff at the bottom
 }
 

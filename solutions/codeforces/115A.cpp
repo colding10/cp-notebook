@@ -65,21 +65,16 @@ const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1}; // for every grid problem!!
-const char dir[4] {'D', 'R', 'U', 'L'}, cdir[4] {'S', 'E', 'N', 'W'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
+const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -88,13 +83,11 @@ int ans = -1;
 vb visited;
 
 int dfs(int v, int p = -1, int depth = 0) {
-    if (visited[v])
-        return 0;
+    if (visited[v]) return 0;
 
     int size = 1;
     for (auto u : adj[v]) {
-        if (u == p)
-            continue;
+        if (u == p) continue;
         size += dfs(u, v, depth + 1);
     }
     return size;
@@ -119,8 +112,7 @@ int main() {
     }
 
     F0R(i, n) {
-        if (visited[i])
-            continue;
+        if (visited[i]) continue;
         int depth = dfs(i);
         ckmax(ans, depth);
     }

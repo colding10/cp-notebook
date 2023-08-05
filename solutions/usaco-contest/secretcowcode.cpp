@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -14,7 +14,7 @@ int main() {
     cin >> s >> n;
 
     long long len_s = s.length();
-    long long needed_reps = ceil(log2(n/len_s + 1));
+    long long needed_reps = ceil(log2(n / len_s + 1));
 
     string code = s;
     while (code.length() < n) {

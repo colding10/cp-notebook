@@ -50,20 +50,15 @@ const ll INF_64 = ll(9223372036854775807);
 
 const int MOD = 1000000007;
 const ll BIG = 1e18; // not too close to LLONG_MAX
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1};
-const char dir[4] {'D', 'R', 'U', 'L'}, cdir[4] {'S', 'E', 'N', 'W'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
+const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -104,8 +99,7 @@ int main() {
 
         visited[u] = true;
 
-        if (n == u)
-            break;
+        if (n == u) break;
 
         for (auto [node, weight] : adj[u]) {
             if (!visited[node] && dist[u] + weight < dist[node]) {
@@ -123,9 +117,7 @@ int main() {
             steps.pb(i);
             i = prev_node[i];
         }
-        R0F(i, sz(steps)) {
-            cout << steps[i] << " ";
-        }
+        R0F(i, sz(steps)) { cout << steps[i] << " "; }
         cout << endl;
     } else {
         cout << "-1" << endl;

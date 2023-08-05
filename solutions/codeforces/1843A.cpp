@@ -11,24 +11,24 @@ using pll = pair<ll, ll>;
 #define f first
 #define s second
 
-#define FOR(i,a,b) for (int i=(a); i < (b); ++i)
-#define F0R(i,a) FOR(i,0,a)
-#define ROF(i,a,b) for (int i=(b)-1; i >= (a); --i)
-#define R0F(i,a) ROF(i,0,a)
-#define rep(a) F0R(_,a)
+#define FOR(i, a, b) for (int i = (a); i < (b); ++i)
+#define F0R(i, a) FOR(i, 0, a)
+#define ROF(i, a, b) for (int i = (b)-1; i >= (a); --i)
+#define R0F(i, a) ROF(i, 0, a)
+#define rep(a) F0R(_, a)
 
 void solve() {
     int n;
     cin >> n;
     vector<int> a(n);
-    for (int& x : a) { cin >> x; }
+    for (int &x : a) {
+        cin >> x;
+    }
 
     sort(begin(a), end(a));
 
     int ans = 0;
-    F0R(i, (n/2) + (n%2!=0)) {
-        ans += (a[n-i-1] - a[i]);
-    }
+    F0R(i, (n / 2) + (n % 2 != 0)) { ans += (a[n - i - 1] - a[i]); }
 
     cout << ans << endl;
 }

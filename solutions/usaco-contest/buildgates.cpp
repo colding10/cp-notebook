@@ -12,10 +12,10 @@ int cc_count = 0;
 
 vector<pair<int, int>> getNeigh(int x, int y, int n) {
     vector<pair<int, int>> out;
-    if (x > 1) out.push_back(make_pair(x-1, y));
-    if (y > 1) out.push_back(make_pair(x, y-1));
-    if (x < n) out.push_back(make_pair(x+1, y));
-    if (y < n) out.push_back(make_pair(x, y+1));
+    if (x > 1) out.push_back(make_pair(x - 1, y));
+    if (y > 1) out.push_back(make_pair(x, y - 1));
+    if (x < n) out.push_back(make_pair(x + 1, y));
+    if (y < n) out.push_back(make_pair(x, y + 1));
     return out;
 }
 
@@ -36,7 +36,6 @@ void floodfill(int x, int y, int n, bool from_neigh = false) {
     }
 }
 
-
 int main() {
     freopen("gates.in", "r", stdin);
     freopen("gates.out", "w", stdout);
@@ -44,8 +43,8 @@ int main() {
     int n;
     cin >> n;
 
-    int currx = n/2+1;
-    int curry = n/2+1;
+    int currx = n / 2 + 1;
+    int curry = n / 2 + 1;
 
     char d;
     for (int i = 0; i < n; i++) {
@@ -63,8 +62,8 @@ int main() {
         }
     }
 
-    for (int x = 1; x <= n+1; x++) {
-        for (int y = 1; y <= n+1; y++) {
+    for (int x = 1; x <= n + 1; x++) {
+        for (int y = 1; y <= n + 1; y++) {
             floodfill(x, y, n);
         }
     }

@@ -18,16 +18,11 @@ using pll = pair<ll, ll>;
 #define rep(a) F0R(_, a)
 
 inline namespace FileIO {
-inline void setIn(const string &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-inline void setOut(const string &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+inline void setIn(const string &s) { freopen(s.c_str(), "r", stdin); }
+inline void setOut(const string &s) { freopen(s.c_str(), "w", stdout); }
 inline void setIO(const string &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (int((s).size()))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (int((s).size())) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -36,24 +31,24 @@ inline namespace Helpers {
 template <class T, class = void> struct is_iterable : false_type {};
 template <class T>
 struct is_iterable<
-T, void_t<decltype(begin(declval<T>())), decltype(end(declval<T>()))>>
-: true_type {};
+    T, void_t<decltype(begin(declval<T>())), decltype(end(declval<T>()))>>
+    : true_type {};
 template <class T> constexpr bool is_iterable_v = is_iterable<T>::value;
 
 // is readable
 template <class T, class = void> struct is_readable : false_type {};
 template <class T>
 struct is_readable<T, typename std::enable_if_t<is_same_v<
-decltype(cin >> declval<T &>()), istream &>>>
-: true_type {};
+                          decltype(cin >> declval<T &>()), istream &>>>
+    : true_type {};
 template <class T> constexpr bool is_readable_v = is_readable<T>::value;
 
 // is printable
 template <class T, class = void> struct is_printable : false_type {};
 template <class T>
 struct is_printable<T, typename std::enable_if_t<is_same_v<
-decltype(cout << declval<T>()), ostream &>>>
-: true_type {};
+                           decltype(cout << declval<T>()), ostream &>>>
+    : true_type {};
 template <class T> constexpr bool is_printable_v = is_printable<T>::value;
 } // namespace Helpers
 
@@ -75,9 +70,7 @@ template <class T> void re(complex<T> &c) {
 template <class T>
 typename enable_if<needs_input_v<T>, void>::type
 re(T &i); // ex. vectors, arrays
-template <class T, class U> void re(pair<T, U> &p) {
-    re(p.f, p.s);
-}
+template <class T, class U> void re(pair<T, U> &p) { re(p.f, p.s); }
 template <class T> typename enable_if<needs_input_v<T>, void>::type re(T &i) {
     for (auto &x : i)
         re(x);
@@ -96,9 +89,7 @@ template <class T, class... U> void rv(size_t N, vector<T> &t, U &...u) {
     re(t);
     rv(N, u...);
 }
-template <class... U> void rv(size_t, size_t N2, U &...u) {
-    rv(N2, u...);
-}
+template <class... U> void rv(size_t, size_t N2, U &...u) { rv(N2, u...); }
 
 // dumb shortcuts to read in ints
 inline void decrement() {} // subtract one from each
@@ -107,11 +98,11 @@ template <class T, class... U> void decrement(T &t, U &...u) {
     decrement(u...);
 }
 #define ints(...)                                                              \
-  int __VA_ARGS__;                                                             \
-  re(__VA_ARGS__);
+    int __VA_ARGS__;                                                           \
+    re(__VA_ARGS__);
 #define int1(...)                                                              \
-  ints(__VA_ARGS__);                                                           \
-  decrement(__VA_ARGS__);
+    ints(__VA_ARGS__);                                                         \
+    decrement(__VA_ARGS__);
 } // namespace Input
 void solve() {
     int n;
