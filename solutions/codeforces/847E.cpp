@@ -32,8 +32,7 @@ using str = string;
 using pi = pair<int, int>;
 using pl = pair<ll, ll>;
 using pd = pair<db, db>;
-
-#define mp make_pair
+define mp make_pair
 #define f first
 #define s second
 
