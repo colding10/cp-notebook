@@ -1,8 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <set>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
+#include <set>
+#include <vector>
 using namespace std;
 
 int main() {
@@ -23,7 +23,7 @@ int main() {
 
     for (int i = 0; i < m; i++) {
         int l = 0;
-        for (const auto& t : towers) {
+        for (const auto &t : towers) {
             int dist = abs(t.first - people[i]);
             int height = max(0, t.second - dist);
             l = max(l, height);

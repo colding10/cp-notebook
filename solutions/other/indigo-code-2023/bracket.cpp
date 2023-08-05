@@ -1,6 +1,6 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
-#include <algorithm>
 #include <vector>
 using namespace std;
 
@@ -40,7 +40,7 @@ void recurse(string expr) {
         std::count(expr.begin(), expr.begin() + missing_idx, '(')) {
         return;
     }
-    
+
     string e1 = expr;
     string e2 = expr;
 

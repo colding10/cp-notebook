@@ -92,11 +92,11 @@ tcT > int upb(V<T> &a, const T &b) { return int(ub(all(a), b) - bg(a)); }
 // Consts
 //
 
-const int MOD = (int)1e9 + 7;  // 998244353;
+const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
-const ll BIG = 1e18;  // not too close to LLONG_MAX
+const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};  // for every grid problem!!
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
@@ -106,7 +106,7 @@ void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
     if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
-}  // namespace FileIO
+} // namespace FileIO
 
 int main() {
     setIO();
