@@ -10,13 +10,13 @@ This repo is a collection of:
 
 I will also be adding tools, resources, and such as I find and use them.
 
-### How to use the plugin
+## How to use the plugin
 
 Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with a package manager of your choice.
 
-### Project structure
+## Project structure
 
-```
+```zsh
 .
 ├── LICENSE
 ├── README.md                     [file you're reading right now]
@@ -29,18 +29,12 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 │       └── algo-ds.vim
 │
 ├── solutions                     [solutions to various online judges]
-│   │
 │   ├── codeforces                all of my codeforces solutions
 │   ├── cses.fi                   all of my cses solutions
 │   ├── usaco-contest             usaco solutions (needs organizing)
 │   └── usaco-training            usaco training (needs organizing)
 │
 └── templates                     [where i keep my templates]
-    ├── BST
-    ├── DP
-    ├── Examples
-    ├── Geometry
-    ├── Graphs
     ├── Main                      [the basic templates (i dont use one these days)]
     │   ├── basic_types.h
     │   ├── ckmin_max.h
@@ -48,9 +42,5 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
     │   ├── minimal-template.cpp
     │   ├── short-template.cpp
     │   └── vector_types.h
-    ├── Math
-    ├── Other
-    ├── RangeQuery
-    ├── Strings
-    └── Trie
+    └── Etc....                   [and a bunch of other folders w/ code]
 ```
