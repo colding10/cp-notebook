@@ -30,7 +30,7 @@ void recurse(int i, int j) {
     if (visited[i][j]) {
         return;
     }
-    
+
     visited[i][j] = true;
     grid[i][j] = value;
     value++;
@@ -38,7 +38,7 @@ void recurse(int i, int j) {
     for (auto p : genNeighbors(i, j)) {
         recurse(p.first, p.second);
     }
-    
+
     // Reset visited flag for backtracking
     visited[i][j] = false;
     value--;
@@ -47,14 +47,15 @@ void recurse(int i, int j) {
 int main() {
     int x, y;
     cin >> x >> y;
-    recurse(y-1, x-1);
+    recurse(y - 1, x - 1);
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            cout << (grid[i][j] < 10 ? " " : "") << grid[i][j] << (j != 7 ? " " : "");
+            cout << (grid[i][j] < 10 ? " " : "") << grid[i][j]
+                 << (j != 7 ? " " : "");
         }
         cout << endl;
     }
-    
+
     return 0;
 }

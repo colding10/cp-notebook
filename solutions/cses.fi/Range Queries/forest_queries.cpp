@@ -67,21 +67,16 @@ const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1}; // for every grid problem!!
-const char dir[4] {'D', 'R', 'U', 'L'}, cdir[4] {'S', 'E', 'N', 'W'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
+const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -106,8 +101,8 @@ int main() {
 
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= N; j++) {
-            pref[i][j] =
-                forest[i][j] + pref[i - 1][j] + pref[i][j - 1] - pref[i - 1][j - 1];
+            pref[i][j] = forest[i][j] + pref[i - 1][j] + pref[i][j - 1] -
+                         pref[i - 1][j - 1];
         }
     }
 
@@ -115,7 +110,7 @@ int main() {
         int x1, x2, y1, y2;
         cin >> x1 >> y1 >> x2 >> y2;
         cout << pref[x2][y2] - pref[x1 - 1][y2] - pref[x2][y1 - 1] +
-             pref[x1 - 1][y1 - 1]
+                    pref[x1 - 1][y1 - 1]
              << '\n';
     }
 }

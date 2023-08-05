@@ -16,24 +16,22 @@ int main() {
     cin.tie(NULL);
 
     int N, A, B;
-    
+
     cin >> N;
     vii arr(N);
 
-	for (int i = 0; i < N; i++)
-	{
-		cin >> A >> B;
-		arr[i] = make_pair(A, B);
-	}
+    for (int i = 0; i < N; i++) {
+        cin >> A >> B;
+        arr[i] = make_pair(A, B);
+    }
 
     sort(arr.begin(), arr.end());
 
     lli total = 0, curr = 0;
-	for (auto ele : arr)
-	{
-		curr += ele.first;
-		total += ele.second - curr;
-	}
+    for (auto ele : arr) {
+        curr += ele.first;
+        total += ele.second - curr;
+    }
     cout << total;
 
     return 0;

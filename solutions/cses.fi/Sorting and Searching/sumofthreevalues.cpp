@@ -10,7 +10,7 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         cin >> nums[i].first;
-        nums[i].second = i+1;
+        nums[i].second = i + 1;
     }
 
     sort(nums.begin(), nums.end());
@@ -23,8 +23,8 @@ int main() {
             int s = nums[a].first + nums[l].first + nums[r].first;
 
             if (l != a && r != a && s == x) {
-                cout << nums[a].second << " " << nums[l].second << " " << nums[r].second
-                     << endl;
+                cout << nums[a].second << " " << nums[l].second << " "
+                     << nums[r].second << endl;
                 return 0;
             }
 

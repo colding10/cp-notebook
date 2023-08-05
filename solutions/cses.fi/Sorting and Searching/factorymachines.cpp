@@ -1,12 +1,13 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 #define ll long long
 
 int main() {
-    int n; ll k;
+    int n;
+    ll k;
     cin >> n >> k;
 
     vector<ll> machines(n);
@@ -22,7 +23,7 @@ int main() {
         for (int i = 0; i < n; i++) {
             cnt += mid / machines[i];
             if (cnt >= k) {
-            	break;
+                break;
             }
         }
         if (cnt >= k) {

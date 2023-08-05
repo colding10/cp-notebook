@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int min(int x, int y, int z) {
-    return min(min(x, y), z);
-}
+int min(int x, int y, int z) { return min(min(x, y), z); }
 
 int editDistDP(string str1, string str2, int m, int n) {
     int dp[m + 1][n + 1];

@@ -47,8 +47,6 @@ int main() {
     }
 
     dfs(0);
-    F0R(i, n) {
-        cout << subtree_size[i] - 1 << " ";
-    }
+    F0R(i, n) { cout << subtree_size[i] - 1 << " "; }
     cout << endl;
 }

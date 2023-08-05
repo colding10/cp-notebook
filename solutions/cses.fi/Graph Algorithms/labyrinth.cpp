@@ -75,12 +75,8 @@ using vpd = V<pd>;
 
 #define lb lower_bound
 #define ub upper_bound
-tcT > int lwb(V<T> &a, const T &b) {
-    return int(lb(all(a), b) - bg(a));
-}
-tcT > int upb(V<T> &a, const T &b) {
-    return int(ub(all(a), b) - bg(a));
-}
+tcT > int lwb(V<T> &a, const T &b) { return int(lb(all(a), b) - bg(a)); }
+tcT > int upb(V<T> &a, const T &b) { return int(ub(all(a), b) - bg(a)); }
 
 //
 // Loops
@@ -102,22 +98,17 @@ const ll BIG = 1e18; // not too close to LLONG_MAX
 
 const db PI = acos((db)-1);
 
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1}; // for every grid problem!!
-const char dir[4] {'D', 'R', 'U', 'L'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
+const char dir[4]{'D', 'R', 'U', 'L'};
 
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -150,8 +141,7 @@ void bfs(int sx, int sy, int tx, int ty) {
             if (nx < 0 || ny < 0 || nx >= n || ny >= m) {
                 continue;
             }
-            if (visited[nx][ny] || graph[nx][ny] == '#')
-                continue;
+            if (visited[nx][ny] || graph[nx][ny] == '#') continue;
 
             visited[nx][ny] = true;
             prev_step[nx][ny] = i;
