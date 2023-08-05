@@ -25,8 +25,7 @@ int power(long long base, int e, int M = MOD) {
     long long result = 1;
     base %= M;
     while (e) {
-        if (e & 1)
-            result = (result * base) % M;
+        if (e & 1) result = (result * base) % M;
         base = (base * base) % M;
         e >>= 1;
     }
@@ -46,8 +45,7 @@ const int tab64[64] = {63, 0,  58, 1,  59, 47, 53, 2,  60, 39, 48, 27, 54,
                        33, 42, 3,  61, 51, 37, 40, 49, 18, 28, 20, 55, 30,
                        34, 11, 43, 14, 22, 4,  62, 57, 46, 52, 38, 26, 32,
                        41, 50, 36, 17, 19, 29, 10, 13, 21, 56, 45, 25, 31,
-                       35, 16, 9,  12, 44, 24, 15, 8,  23, 7,  6,  5
-                      };
+                       35, 16, 9,  12, 44, 24, 15, 8,  23, 7,  6,  5};
 
 int log2_64(uint64_t value) {
     value |= value >> 1;
@@ -56,7 +54,8 @@ int log2_64(uint64_t value) {
     value |= value >> 8;
     value |= value >> 16;
     value |= value >> 32;
-    return tab64[((uint64_t)((value - (value >> 1)) * 0x07EDD5E59A4E28C2)) >> 58];
+    return tab64[((uint64_t)((value - (value >> 1)) * 0x07EDD5E59A4E28C2)) >>
+                 58];
 }
 #include <cmath>
 #include <cstdint>
@@ -88,7 +87,7 @@ float my_logf(float a) {
 #else  // PORTABLE
     i = 0.0f;
     if (a < 1.175494351e-38f) { // 0x1.0p-126
-        a = a * 8388608.0f;       // 0x1.0p+23
+        a = a * 8388608.0f;     // 0x1.0p+23
         i = -23.0f;
     }
     e = (__float_as_int(a) - __float_as_int(0.666666667f)) & 0xff800000;
@@ -112,11 +111,9 @@ float my_logf(float a) {
     r = fmaf(r, s, m);
     r = fmaf(i, 0.693147182f, r); //  0x1.62e430p-1 // log(2)
     if (!((a > 0.0f) && (a < INFINITY))) {
-        r = a + a; // silence NaNs if necessary
-        if (a < 0.0f)
-            r = INFINITY - INFINITY; //  NaN
-        if (a == 0.0f)
-            r = -INFINITY;
+        r = a + a;                             // silence NaNs if necessary
+        if (a < 0.0f) r = INFINITY - INFINITY; //  NaN
+        if (a == 0.0f) r = -INFINITY;
     }
     return r;
 }
@@ -135,8 +132,7 @@ void solve() {
             cout << "YES" << endl;
             return;
         }
-        if (vertices > n)
-            break;
+        if (vertices > n) break;
     }
     cout << "NO\n";
 }

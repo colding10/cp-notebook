@@ -29,9 +29,11 @@ int main() {
                 table[i][j] +=
                     c *
                     (smalltrees[i - 2][k] *
-                     table[i - 1][j - 1 - k] // left subtree smaller than i-1
-                     + table[i - 1][k] * smalltrees[i - 2][j - 1 - k] // right smaller
-                     + table[i - 1][k] * table[i - 1][j - 1 - k]);    // both i-1
+                         table[i - 1]
+                              [j - 1 - k] // left subtree smaller than i-1
+                     + table[i - 1][k] *
+                           smalltrees[i - 2][j - 1 - k] // right smaller
+                     + table[i - 1][k] * table[i - 1][j - 1 - k]); // both i-1
                 table[i][j] %= MOD;
             }
         for (int k = 0; k <= N; k++) { // we ensure that smalltrees[i-2][j] in

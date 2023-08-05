@@ -75,12 +75,8 @@ using vpd = V<pd>;
 
 #define lb lower_bound
 #define ub upper_bound
-tcT > int lwb(V<T> &a, const T &b) {
-    return int(lb(all(a), b) - bg(a));
-}
-tcT > int upb(V<T> &a, const T &b) {
-    return int(ub(all(a), b) - bg(a));
-}
+tcT > int lwb(V<T> &a, const T &b) { return int(lb(all(a), b) - bg(a)); }
+tcT > int upb(V<T> &a, const T &b) { return int(ub(all(a), b) - bg(a)); }
 
 //
 // Loops
@@ -99,20 +95,15 @@ const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1}; // for every grid problem!!
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -125,9 +116,7 @@ void s_reset_visited() {
     int i;
     F0R(i, N) {
         int j;
-        F0R(j, 10) {
-            s_visited[i][j] = false;
-        }
+        F0R(j, 10) { s_visited[i][j] = false; }
     }
 }
 
@@ -135,9 +124,7 @@ void d_reset_visited() {
     int i;
     F0R(i, N) {
         int j;
-        F0R(j, 10) {
-            d_visited[i][j] = false;
-        }
+        F0R(j, 10) { d_visited[i][j] = false; }
     }
 }
 
@@ -154,9 +141,7 @@ void delete_cc(int i, int j, int color) {
     d_visited[i][j] = true;
     graph[i][j] = 0;
     int x;
-    F0R(x, 4) {
-        delete_cc(i + dx[x], j + dy[x], color);
-    }
+    F0R(x, 4) { delete_cc(i + dx[x], j + dy[x], color); }
 }
 
 int cc_size(int i, int j, int color) {
@@ -174,9 +159,7 @@ int cc_size(int i, int j, int color) {
 
     int out = 1;
     int x;
-    F0R(x, 4) {
-        out += cc_size(i + dx[x], j + dy[x], color);
-    }
+    F0R(x, 4) { out += cc_size(i + dx[x], j + dy[x], color); }
 
     return out;
 }
@@ -201,9 +184,7 @@ void apply_gravity() {
 void print_graph() {
     int i, j;
     F0R(i, N) {
-        F0R(j, 10) {
-            cout << graph[i][j];
-        }
+        F0R(j, 10) { cout << graph[i][j]; }
         cout << endl;
     }
 }
@@ -235,8 +216,7 @@ int main() {
         bool deleted_one = false;
         F0R(i, N) {
             F0R(j, 10) {
-                if (graph[i][j] == 0)
-                    continue;
+                if (graph[i][j] == 0) continue;
 
                 if (cc_size(i, j, graph[i][j]) >= K) {
                     delete_cc(i, j, graph[i][j]);

@@ -22,9 +22,7 @@ void solve() {
     cin >> n >> k;
 
     vi a(n);
-    F0R(i, n) {
-        cin >> a[i];
-    }
+    F0R(i, n) { cin >> a[i]; }
 
     sort(a.begin(), a.end());
 
@@ -42,10 +40,9 @@ void solve() {
         }
     }
 
-    segs.pb(segsize+1);
-    msegsize = max(msegsize, segsize+1);
+    segs.pb(segsize + 1);
+    msegsize = max(msegsize, segsize + 1);
 
-    
     if (segs.size() == 1) {
         cout << 0 << endl;
         return;
@@ -54,7 +51,7 @@ void solve() {
     // ans = min(ans, n - segs.back());
     //
     // cout << ans << endl;
-    cout << (n-msegsize) << endl;
+    cout << (n - msegsize) << endl;
 }
 
 int main() {

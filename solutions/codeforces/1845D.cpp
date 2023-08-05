@@ -45,14 +45,12 @@ using vpi = V<pi>;
 using vpl = V<pl>;
 using vpd = V<pd>;
 
-template <class T>
-bool ckmin(T &a, T &b) {
+template <class T> bool ckmin(T &a, T &b) {
     bool B = a > b;
     a = min(a, b);
     return B;
 }
-template <class T>
-bool ckmax(T &a, T &b) {
+template <class T> bool ckmax(T &a, T &b) {
     bool B = a < b;
     a = max(a, b);
     return B;
@@ -80,27 +78,22 @@ bool ckmax(T &a, T &b) {
 #define rep(a) F0R(_, a)
 #define each(a, x) for (auto &a : x)
 
-const int MOD = (int)1e9 + 7;  // 998244353;
+const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
-const ll BIG = 1e18;  // not too close to LLONG_MAX
+const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};  // for every grid problem!!
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
 const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
-}  // namespace FileIO
+} // namespace FileIO
 
 void solve() {
     int n;

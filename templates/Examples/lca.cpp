@@ -4,7 +4,7 @@
 using namespace std;
 
 class RMQ {
-public:
+  public:
     RMQ(vector<int> v) {
         log_table.assign(v.size() + 1, 0);
         for (int i = 2; i < log_table.size(); i++)
@@ -14,8 +14,9 @@ public:
         sparse_table[0] = v;
         for (int row = 1; row < sparse_table.size(); row++) {
             for (int i = 0; i + (1 << row) <= v.size(); i++) {
-                sparse_table[row][i] = min(sparse_table[row - 1][i],
-                                           sparse_table[row - 1][i + (1 << (row - 1))]);
+                sparse_table[row][i] =
+                    min(sparse_table[row - 1][i],
+                        sparse_table[row - 1][i + (1 << (row - 1))]);
             }
         }
     }
@@ -25,7 +26,7 @@ public:
         return min(sparse_table[log][l], sparse_table[log][r - (1 << log)]);
     }
 
-private:
+  private:
     vector<int> log_table;
     vector<vector<int>> sparse_table;
 };
@@ -42,8 +43,7 @@ void dfs_euler_tour(int v, int p) {
     euler_tour.push_back(new_index);
 
     for (int u : adj[v]) {
-        if (u == p)
-            continue;
+        if (u == p) continue;
 
         dfs_euler_tour(u, v);
         euler_tour.push_back(new_index);
@@ -53,8 +53,7 @@ void dfs_euler_tour(int v, int p) {
 int main() {
     int nodes = 10;
     vector<pair<int, int>> edges = {{0, 5}, {5, 7}, {7, 2}, {5, 1}, {1, 3},
-        {1, 6}, {5, 8}, {0, 9}, {9, 4}
-    };
+                                    {1, 6}, {5, 8}, {0, 9}, {9, 4}};
 
     adj.resize(nodes);
     for (auto edge : edges) {
@@ -70,8 +69,7 @@ int main() {
     cin >> u >> v;
     int fe1 = first_encounter[u];
     int fe2 = first_encounter[v];
-    if (fe1 > fe2)
-        swap(fe1, fe2);
+    if (fe1 > fe2) swap(fe1, fe2);
     int LCA_new_index = rmq.minimum(fe1, fe2 + 1);
     int LCA_old_index = new_to_old[LCA_new_index];
     cout << "LCA_new_index: " << LCA_new_index << endl;

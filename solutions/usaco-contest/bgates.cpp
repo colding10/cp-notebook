@@ -1,5 +1,5 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <queue>
 
 using namespace std;
@@ -63,7 +63,8 @@ int main() {
                 for (int k = 0; k < 4; k++) {
                     int nx = curr.x + dx[k];
                     int ny = curr.y + dy[k];
-                    if (nx >= 0 && nx < 2005 && ny >= 0 && ny < 2005 && !isFence[nx][ny]) {
+                    if (nx >= 0 && nx < 2005 && ny >= 0 && ny < 2005 &&
+                        !isFence[nx][ny]) {
                         isFence[nx][ny] = true;
                         q.push(Point(nx, ny));
                     }

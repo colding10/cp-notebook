@@ -104,8 +104,7 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -116,7 +115,9 @@ int main() {
     setIO("lemonade");
     cin >> N;
     cows.rsz(N);
-    for (auto& x : cows) { cin >> x; }
+    for (auto &x : cows) {
+        cin >> x;
+    }
     sort(all(cows), greater<>());
 
     ll cows_in_line = 0;

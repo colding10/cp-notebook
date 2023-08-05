@@ -104,8 +104,7 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -124,7 +123,7 @@ int main() {
         cin >> x;
         opp_played.push_back(x);
         opp_cards.insert(x);
-		elsie_has[x] = true;
+        elsie_has[x] = true;
     }
 
     int prev = 1;
@@ -134,7 +133,7 @@ int main() {
         }
         prev = c + 1;
     }
-    for (int x = prev; x <= N*2; x++) {
+    for (int x = prev; x <= N * 2; x++) {
         cards.insert(x);
     }
 

@@ -45,8 +45,16 @@ using vpi = V<pi>;
 using vpl = V<pl>;
 using vpd = V<pd>;
 
-template<class T> bool ckmin(T&a, T&b) { bool B = a > b; a = min(a,b); return B; }
-template<class T> bool ckmax(T&a, T&b) { bool B = a < b; a = max(a,b); return B; }
+template <class T> bool ckmin(T &a, T &b) {
+    bool B = a > b;
+    a = min(a, b);
+    return B;
+}
+template <class T> bool ckmax(T &a, T &b) {
+    bool B = a < b;
+    a = max(a, b);
+    return B;
+}
 
 #define sz(x) int((x).size())
 #define bg(x) begin(x)
@@ -74,30 +82,24 @@ const int MOD = (int)1e9 + 7; // 998244353;
 const int MX = (int)2e5 + 5;
 const ll BIG = 1e18; // not too close to LLONG_MAX
 const db PI = acos((db)-1);
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1}; // for every grid problem!!
-const char dir[4] {'D', 'R', 'U', 'L'}, cdir[4] {'S', 'E', 'N', 'W'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; // for every grid problem!!
+const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
 int main() {
     setIO();
-    
+
     int n;
     cin >> n;
-
 
     int highest = -1;
     int highest_pos = -1;
@@ -111,16 +113,16 @@ int main() {
 
         if (ckmax(highest, x)) {
             highest_pos = i;
-        } 
+        }
         if (ckmin(shortest, x) || shortest == x) {
             shortest_pos = i;
         }
     }
 
     if (highest_pos < shortest_pos) {
-        cout << highest_pos + n-1 - shortest_pos << endl;
+        cout << highest_pos + n - 1 - shortest_pos << endl;
     } else {
-        cout << highest_pos + n-1 - shortest_pos - 1 << endl;
+        cout << highest_pos + n - 1 - shortest_pos - 1 << endl;
     }
     // you should actually read the stuff at the bottom
 }

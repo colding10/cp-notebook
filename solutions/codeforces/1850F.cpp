@@ -26,8 +26,7 @@ void solve() {
     rep(n) {
         int x;
         cin >> x;
-        if (x <= n)
-            a[x]++;
+        if (x <= n) a[x]++;
     }
 
     for (int i = 1; i <= n; ++i) {

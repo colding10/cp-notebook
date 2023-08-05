@@ -22,9 +22,7 @@ void solve() {
     cin >> n;
 
     vi a(n);
-    F0R(i, n) {
-        cin >> a[i];
-    }
+    F0R(i, n) { cin >> a[i]; }
 
     sort(a.begin(), a.end());
     multiset<int> lines;
