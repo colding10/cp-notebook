@@ -2,6 +2,7 @@ LT_INCLUDE_STD = -1
 LT_INCLUDE_USR = -2
 
 LT_NORMAL = 1
+asfa = 1
 
 
 class Line:

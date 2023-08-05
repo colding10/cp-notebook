@@ -56,6 +56,7 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
+void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -90,12 +91,120 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
+const int maxn = 100000;
+
+vpi adj[maxn];
+ll d[maxn];
+int parent[maxn][17], parenti[maxn], depth[maxn];
+
+void dfs(int u, int p, int d) {
+    parent[u][0] = p;
+    depth[u] = d;
+
+    for (auto [v, i] : adj[u]) {
+        if (v != p) {
+            parenti[v] = i;
+            dfs(v, u, d + 1);
+        }
+    }
+}
+
+int logn;
+int lca(int u, int v) {
+    int i;
+    if (depth[u] < depth[v]) {
+        swap(u, v);
+    }
+
+    for (int i = logn - 1; i >= 0; i--) {
+        if ((parent[u][i] != -1) && (depth[parent[u][i]] >= depth[v])) {
+            u = parent[u][i];
+        }
+    }
+
+    if (u == v) {
+        return u;
+    }
+
+    for (int i = logn - 1; i >= 0; i--) {
+        if (parent[u][i] != parent[v][i]) {
+            u = parent[u][i];
+            v = parent[v][i];
+        }
+    }
+
+    return parent[u][0];
+}
+
+int lcas[maxn], bit[maxn];
+ll ans[maxn], w[maxn];
+
 int main() {
     setIO();
 
-    // you should actually read the stuff at the bottom
+    int n, u, v, i;
+    cin >> n;
+    rep(i, 0, n - 1) {
+        cin >> u >> v;
+        u--, v--;
+        adj[u].pb(mp(v, i));
+        adj[v].pb(mp(u, i));
+    }
+
+    rep(i, 0, n - 1) {
+        cin >> d[i];
+    }
+
+    dfs(0, -1, 0);
+    for (i = 1; (1 << i) < n; i++) {
+        rep(j, 0, n) {
+            if (parent[j][i - 1] != -1) {
+                parent[j][i] = parent[parent[j][i - 1]][i - 1];
+            } else {
+                parent[j][i] = -1;
+            }
+        }
+    }
+
+    logn = i;
+    rep(i, 0, n - 1) {
+        lcas[i] = lca(i, i + 1);
+    }
+
+    rep(i, 0, 57) {
+        bit[0] = 0;
+        rep(j, 0, n - 1) {
+            bit[j + 1] = bit[j] ^ (d[j] & 1);
+        }
+        rep(j, 0, n - 1) {
+            d[j] = (d[j] - bit[j] - bit[j + 1] + 2 * bit[lcas[j]]) / 2;
+        }
+        rep(j, 0, n) {
+            ans[j] |= ((ll)bit[j] << i);
+        }
+    }
+
+    rep(i, 0, n - 1) {
+        if (d[i] != 0) {
+            cout << -1 << endl;
+            return 0;
+        }
+    }
+
+    rep(i, 1, n) {
+        w[parenti[i]] = ans[i] - ans[parent[i][0]];
+        if (w[parenti[i]] <= 0) {
+            cout << -1 << endl;
+            return 0;
+        }
+    }
+
+    rep(i, 0, n - 1) {
+        cout << w[i] << endl;
+    }
 }
 
+// you should actually read the stuff at the bottom
 // keep calm
 // stay organized
 // do something instead of wasting time

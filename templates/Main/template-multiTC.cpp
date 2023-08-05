@@ -32,20 +32,15 @@ using vpll = V<pll>;
 #define eb emplace_back
 
 #define rep(i, begin, end)                                                     \
-  for (__typeof(end) i = (begin) - ((begin) > (end));                          \
-       i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+    for (__typeof(end) i = (begin) - ((begin) > (end));                        \
+         i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -65,21 +60,31 @@ void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
 template <typename T, typename V> void __print(const pair<T, V> &x) {
-    cerr << '{'; __print(x.first); cerr << ", "; __print(x.second); cerr << '}';
+    cerr << '{';
+    __print(x.first);
+    cerr << ", ";
+    __print(x.second);
+    cerr << '}';
 }
 template <typename T> void __print(const T &x) {
-    int f = 0; cerr << '{'; for (auto &i : x) cerr << (f++ ? ", " : ""), __print(i); cerr << "}";
+    int f = 0;
+    cerr << '{';
+    for (auto &i : x)
+        cerr << (f++ ? ", " : ""), __print(i);
+    cerr << "}";
 }
 void _print() { cerr << "]\n"; }
 template <typename T, typename... V> void _print(T t, V... v) {
-    __print(t); if (sizeof...(v)) cerr << ", "; _print(v...);
+    __print(t);
+    if (sizeof...(v)) cerr << ", ";
+    _print(v...);
 }
 
 #ifndef ONLINE_JUDGE
 #define dbg(x...)                                                              \
-  cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = [";    \
-  _print(x);                                                                   \
-  cerr << "\e[39m" << endl;
+    cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = [";  \
+    _print(x);                                                                 \
+    cerr << "\e[39m" << endl;
 #else
 #define dbg(x...)
 #endif
