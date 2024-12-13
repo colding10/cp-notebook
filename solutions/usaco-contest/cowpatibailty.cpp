@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -40,7 +39,9 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) {
+        setIn(s + ".in"), setOut(s + ".out");
+    }
 }
 } // namespace FileIO
 
@@ -55,7 +56,6 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -89,50 +89,56 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #define dbg(x...)
 #endif
 } // namespace Debug
-
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
-    }
-
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
-        }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
-    }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
+using Cow = AR<int, 5>;
 
 int main() {
-    setIO();
+    setIO("cowpatibility");
 
-    int tc;
-    cin >> tc;
-    while (tc--) {
-        solve();
+    ll n;
+    cin >> n;
+
+    V<Cow> cows(n);
+    rep(i, 0, n) {
+        rep(j, 0, 5) {
+            cin >> cows[i][j];
+        }
+
+        sort(begin(cows[i]), end(cows[i]));
     }
+
+    V<map<Cow, int>> common(5);
+
+    rep(i, 0, n) {
+        common[4][cows[i]]++;
+
+        rep(a, 0, 5) {
+            common[0][{cows[i][a]}]++;
+            rep(b, a + 1, 5) {
+                common[1][{cows[i][a], cows[i][b]}]++;
+                rep(c, b + 1, 5) {
+                    common[2][{cows[i][a], cows[i][b], cows[i][c]}]++;
+                    rep(d, c + 1, 5) {
+                        common[3][{cows[i][a], cows[i][b], cows[i][c],
+                                   cows[i][d]}]++;
+                    }
+                }
+            }
+        }
+    }
+
+    ll compatible = 0;
+
+    rep(i, 0, 5) {
+        for (auto &[k, v] : common[i]) {
+            if (i & 1) {
+                compatible -= (ll)v * (v - 1) / 2;
+            } else {
+                compatible += (ll)v * (v - 1) / 2;
+            }
+        }
+    }
+
+    cout << (n * (n - 1) / 2) - compatible << endl;
     // you should actually read the stuff at the bottom
 }
 

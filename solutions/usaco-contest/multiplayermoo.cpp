@@ -95,22 +95,22 @@ const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 
 int n;
 V<vi> graph;
-V<vb> visited;
+V<vi> visited;
 
 int sin_best = -1;
 int mul_best = -1;
 
 int floodfill1(int i, int j, int c) {
     if (visited[i][j]) return 0;
-    visited[i][j] = true;
-    
+    visited[i][j] = c;
+
     int out = 1;
     rep(a, 0, 4) {
         int x = i + dx[a];
         int y = j + dy[a];
 
         if (x < 0 || x >= n || y < 0 || y >= n) continue;
-        out += 
+        out +=
     }
 }
 

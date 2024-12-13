@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -40,7 +39,9 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) {
+        setIn(s + ".in"), setOut(s + ".out");
+    }
 }
 } // namespace FileIO
 
@@ -55,7 +56,6 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -90,48 +90,94 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+struct UF {
+    vector<int> e;
+    UF(int n) : e(n, -1) {}
+    bool sameSet(int a, int b) { return find(a) == find(b); }
+    int size(int x) { return -e[find(x)]; }
+    int find(int x) { return e[x] < 0 ? x : e[x] = find(e[x]); }
+    bool join(int a, int b) {
+        a = find(a), b = find(b);
+        if (a == b) return false;
+        if (e[a] > e[b]) swap(a, b);
+        e[a] += e[b];
+        e[b] = a;
+        return true;
     }
+};
+int edgeidG = 0;
+struct Edge {
+    int u, v, w;
+    bool used = false;
+    int eid;
+    Edge(int U, int V, int W) : u(U), v(V), w(W) { eid = edgeidG++; }
+};
+V<Edge> edges;
+int n, d;
+UF uf(n);
+int cost = 0;
+int lastx = -1;
+V<vb> connected;
 
-    sort(all(b));
-    vi a;
+int MST_Kruskal(int x) {
+    rep(i, 0, n) {
+        if (i == x) continue;
+        if (connected[i][x]) {
+            connected[i][x] = false;
+            connected[x][i] = false;
 
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+            cost -= (x + 1) | (i + 1);
         }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
+    if (lastx != -1) {
+        int bestw = INT_MAX;
+        int besti = -1;
+        rep(i, 0, n) {
+            if (i == lastx) continue;
+            int curw = (lastx + 1) | (i + 1);
+            if (curw < bestw) {
+                bestw = curw;
+                besti = i;
+            }
+        }
+        cost += bestw;
+        connected[x][besti] = true;
+        connected[besti][x] = true;
     }
-    cout << endl;
+    lastx = x;
+    return cost;
 }
 
 int main() {
     setIO();
+    cin >> n >> d;
+    uf.e.rsz(n, -1);
+    connected.rsz(n);
+    rep(i, 0, n) {
+        connected[i].rsz(n);
+        rep(j, i + 1, n) {
+            int w = (i + 1) | (j + 1);
+            Edge e(i, j, w);
+            edges.pb(e);
+        }
+    }
+    sort(edges.begin(), edges.end(),
+         [](Edge const &e, Edge const &f) { return e.w < f.w; });
+    for (Edge &e : edges) {
+        if (!uf.sameSet(e.u, e.v)) {
+            uf.join(e.u, e.v);
+            connected[e.v][e.u] = true;
+            connected[e.u][e.v] = true;
+            e.used = true;
+            cost += e.w;
+        }
+    }
+    rep(i, 0, d) {
+        int x;
+        cin >> x;
+        x--;
 
-    int tc;
-    cin >> tc;
-    while (tc--) {
-        solve();
+        cout << MST_Kruskal(x) << endl;
     }
     // you should actually read the stuff at the bottom
 }

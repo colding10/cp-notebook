@@ -89,43 +89,54 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #define dbg(x...)
 #endif
 } // namespace Debug
+#define int ll
+vector<int> dp;
+vector<bool> used;
+vector<vector<int>> sl;
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+int get(int v) {
+    if (used[v]) {
+        return dp[v];
     }
-
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
-        }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
+    used[v] = true;
+    int s = 0;
+    for (int u : sl[v]) {
+        s += get(u);
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
+    if (!sl[v].empty()) dp[v] = min(dp[v], s);
+    return dp[v];
 }
 
-int main() {
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    dp.resize(n);
+    used.assign(n, false);
+    sl.assign(n, vector<int>(0));
+    for (int &e : dp)
+        cin >> e;
+    for (int i = 0; i < k; ++i) {
+        int e;
+        cin >> e;
+        dp[--e] = 0;
+    }
+    for (int i = 0; i < n; ++i) {
+        int m;
+        cin >> m;
+        sl[i].resize(m);
+        for (int &e : sl[i]) {
+            cin >> e;
+            --e;
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        get(i);
+    }
+    for (int e : dp)
+        cout << e << " ";
+    cout << "\n";
+}
+signed main() {
     setIO();
 
     int tc;

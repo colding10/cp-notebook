@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -40,7 +39,9 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) {
+        setIn(s + ".in"), setOut(s + ".out");
+    }
 }
 } // namespace FileIO
 
@@ -55,7 +56,6 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -90,48 +90,69 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
 
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+class SegmentTree {
+public:
+    SegmentTree(int count) {
+        n = count;
+        data.assign(2 * n, 0);
     }
 
-    sort(all(b));
-    vi a;
+    SegmentTree(std::vector<int> const &values) {
+        n = values.size();
+        data.resize(2 * n);
+        std::copy(values.begin(), values.end(), &data[0] + n);
+        for (int idx = n - 1; idx > 0; idx--)
+            data[idx] = std::min(data[idx * 2], data[idx * 2 + 1]);
+    }
 
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+    void update(int idx, int value) {
+        idx += n;
+        data[idx] = value;
+
+        while (idx > 1) {
+            idx /= 2;
+            data[idx] = std::min(data[2 * idx], data[2 * idx + 1]);
         }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
 
+    int minimum(int left, int right) { // interval [left, right)
+        int ret = std::numeric_limits<int>::max();
+        left += n;
+        right += n;
+
+        while (left < right) {
+            if (left & 1)
+                ret = std::min(ret, data[left++]);
+            if (right & 1)
+                ret = std::min(ret, data[--right]);
+            left >>= 1;
+            right >>= 1;
+        }
+        return ret;
+    }
+
+private:
+    int n;
+    std::vector<int> data;
+};
 int main() {
     setIO();
+    
+    int n, q;
+    cin >> n >> q;
 
-    int tc;
-    cin >> tc;
-    while (tc--) {
-        solve();
+    vi data(n);
+    rep(i,0,n) {
+        cin >> data[i];
+    }
+
+    SegmentTree tree(data);
+    rep(i,0,q) {
+        int a, b;
+        cin >> a >> b;
+        a--;
+        cout << tree.minimum(a, b) << endl;
     }
     // you should actually read the stuff at the bottom
 }
@@ -140,3 +161,4 @@ int main() {
 // stay organized
 // do something instead of wasting time
 // the solution is probably simpler than you think
+

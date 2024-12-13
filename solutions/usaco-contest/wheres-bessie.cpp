@@ -41,23 +41,18 @@ template <class T> bool ckmax(T &a, T &b) {
 #define ub upper_bound
 
 #define rep(i, begin, end)                                                     \
-  for (__typeof(end) i = (begin) - ((begin) > (end));                          \
-       i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+    for (__typeof(end) i = (begin) - ((begin) > (end));                        \
+         i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
 
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1};
-const char dir[4] {'D', 'R', 'U', 'L'}, cdir[4] {'S', 'E', 'N', 'W'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
+const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -66,9 +61,7 @@ template <class A, class B> void re(pair<A, B> &p);
 template <class A> void re(vector<A> &v);
 template <class A, size_t SZ> void re(array<A, SZ> &a);
 
-template <class T> void re(T &x) {
-    cin >> x;
-}
+template <class T> void re(T &x) { cin >> x; }
 void re(double &d) {
     string t;
     re(t);
@@ -83,9 +76,7 @@ template <class H, class... T> void re(H &h, T &...t) {
     re(h);
     re(t...);
 }
-template <class A, class B> void re(pair<A, B> &p) {
-    re(p.first, p.second);
-}
+template <class A, class B> void re(pair<A, B> &p) { re(p.first, p.second); }
 template <class A> void re(vector<A> &x) {
     for (auto &i : x)
         re(i);
@@ -103,8 +94,8 @@ struct PCL {
 
 inline namespace WriteIO {
 void print(PCL &p) {
-    cout << "PCL(" << p.x1 << ", " << p.y1 << ", " << p.x2 << ", " << p.y2 << ")"
-         << endl;
+    cout << "PCL(" << p.x1 << ", " << p.y1 << ", " << p.x2 << ", " << p.y2
+         << ")" << endl;
 }
 }; // namespace WriteIO
 
@@ -135,19 +126,15 @@ bool isPCL(int i1, int j1, int i2, int j2) {
         for (int j = j1; j <= j2; j++)
             if (!visited[i][j]) {
                 int c = grid[i][j] - 'A';
-                if (color_count[c] == 0)
-                    num_colors++;
+                if (color_count[c] == 0) num_colors++;
                 color_count[c]++;
                 floodfill(i, j, c, i1, j1, i2, j2);
             }
-    if (num_colors != 2)
-        return false;
+    if (num_colors != 2) return false;
     bool found_one = false, found_many = false;
     for (int i = 0; i < 26; i++) {
-        if (color_count[i] == 1)
-            found_one = true;
-        if (color_count[i] > 1)
-            found_many = true;
+        if (color_count[i] == 1) found_one = true;
+        if (color_count[i] > 1) found_many = true;
     }
     return found_one && found_many;
 }
@@ -159,8 +146,7 @@ bool withinPCL(int x, int y) {
 
 bool isMaxPCL(int x) {
     rep(i, 0, sz(pcls)) {
-        if (i != x && withinPCL(x, i))
-            return false;
+        if (i != x && withinPCL(x, i)) return false;
     }
 
     return true;

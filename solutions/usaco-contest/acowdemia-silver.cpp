@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -40,7 +39,9 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) {
+        setIn(s + ".in"), setOut(s + ".out");
+    }
 }
 } // namespace FileIO
 
@@ -55,7 +56,6 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -90,49 +90,37 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
-    }
-
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
-        }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
-    }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
-
 int main() {
     setIO();
 
-    int tc;
-    cin >> tc;
-    while (tc--) {
-        solve();
+    int n, k, l;
+    cin >> n >> k >> l;
+    vi c(n);
+    rep(i, 0, n) {
+        cin >> c[i];
     }
+
+    sort(all(c), greater<int>());
+
+    int hi = n;
+    int lo = 0;
+
+    while (lo < hi) {
+        int mid = (hi + lo + 1) / 2;
+        ll needed = 0;
+        dbg(mid);
+        rep(j, 0, mid) {
+            needed += (ll)max(0, mid - c[j]);
+        }
+        if (needed <= ((ll)k * (ll)l) && c[mid - 1] + k >= mid) {
+            lo = mid;
+        } else {
+            hi = mid - 1;
+        }
+    }
+
+    cout << hi << endl;
+
     // you should actually read the stuff at the bottom
 }
 

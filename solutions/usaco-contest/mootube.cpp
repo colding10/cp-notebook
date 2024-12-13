@@ -136,7 +136,7 @@ int main() {
     rep(i, 0, q) {
         int v;
         cin >> k >> v;
-        cout << bfs(v-1) << endl;
+        cout << bfs(v - 1) << endl;
     }
     // you should actually read the stuff at the bottom
 }

@@ -90,37 +90,44 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
+int n;
+V<vi> adj;
+vi rel_time;
+
+void dfs(int v, int t, int p = -1) {
+    // dbg(v, t, p);
+    bool inc = false;
+    rel_time[v] = t;
+    if (sz(adj[v]) > 2) {
+        inc = true;
+    }
+    bool first = true;
+    for (auto u : adj[v]) {
+        if (u == p) continue;
+        if (inc && !first) t++;
+        if (first) first = false;
+        dfs(u, t, v);
+    }
+}
+
 void solve() {
-    int n;
     cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+    adj.clear();
+    rel_time.clear();
+    adj.rsz(n);
+    rel_time.rsz(n);
+    rep(i, 0, n - 1) {
+        int a, b;
+        cin >> a >> b;
+        a--, b--;
+        adj[a].pb(b);
+        adj[b].pb(a);
     }
 
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
-        }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
-    }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
+    dfs(0, 1);
+    cout << *max_element(all(rel_time)) << endl;
+    rep(i, 0, sz(rel_time)) {
+        cout << rel_time[i] << " ";
     }
     cout << endl;
 }

@@ -1,3 +1,6 @@
+#pragma comment(linker, "/stack:200000000")
+#pragma GCC optimize("Ofast", "unroll-loops")
+#pragma GCC target("avx2", "popcnt")
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -90,41 +93,94 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
 void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
-    }
-
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+    int n, p;
+    cin >> n >> p;
+    V<V<int>> tubes(3);
+    char prev = 'a';
+    rep(i, 0, n) {
+        char a;
+        cin >> a;
+        if (a != prev) {
+            tubes[0].pb(a - '0');
+            prev = a;
         }
+    }
+    prev = 'a';
+    rep(i, 0, n) {
+        char a;
+        cin >> a;
+        if (a != prev) {
+            tubes[1].pb(a - '0');
+            prev = a;
+        }
+    }
 
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
+    if (tubes[0][0] == tubes[1][0]) {
+        tubes[0].insert(begin(tubes[0]), (tubes[0][0] == 1 ? 2 : 1));
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
+
+    int ans = sz(tubes[0]) + sz(tubes[1]) - 2;
+    if (tubes[0][0] == tubes[1][0]) {
+        ans++;
     }
-    cout << endl;
+    if (ans > 1) {
+        ans++;
+    }
+    cout << ans << endl;
+    if (p == 1) {
+        return;
+    }
+
+    V<pi> moves;
+    auto move = [&](int a, int b) {
+        moves.pb(mp(a, b));
+        if (sz(tubes[b]) == 0 || tubes[b].back() != tubes[a].back()) {
+            tubes[b].pb(tubes[a].back());
+        }
+        tubes[a].pop_back();
+    };
+    if (tubes[0].back() == tubes[1].back()) {
+        if (sz(tubes[0]) > sz(tubes[1])) {
+            move(0, 1);
+        } else {
+            move(1, 0);
+        }
+    }
+
+    rep(tubeid, 0, 2) {
+        if ((sz(tubes[tubeid])) > 1) {
+            move(tubeid, 2); // move to beaker
+            int i = 0;
+            if (tubes[i][0] == tubes[2][0]) {
+                i ^= 1;
+            }
+            while (sz(tubes[i]) > 1) {
+                if (tubes[i].back() == tubes[2][0]) {
+                    move(i, 2);
+                } else {
+                    move(i, i ^ 1);
+                }
+            }
+            i ^= 1;
+            while (sz(tubes[i]) > 1) {
+                if (tubes[i].back() == tubes[2][0]) {
+                    move(i, 2);
+                } else {
+                    move(i, i ^ 1);
+                }
+            }
+            move(2, i);
+            break;
+        }
+    }
+
+    assert(sz(moves) == ans);
+    for (auto p : moves) {
+        int a = p.fi, b = p.se;
+        cout << a + 1 << " " << b + 1 << endl;
+    }
 }
-
 int main() {
     setIO();
 

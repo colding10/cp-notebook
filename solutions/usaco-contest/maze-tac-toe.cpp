@@ -41,23 +41,18 @@ template <class T> bool ckmax(T &a, T &b) {
 #define ub upper_bound
 
 #define rep(i, begin, end)                                                     \
-  for (__typeof(end) i = (begin) - ((begin) > (end));                          \
-       i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+    for (__typeof(end) i = (begin) - ((begin) > (end));                        \
+         i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
 
-const int dx[4] {1, 0, -1, 0}, dy[4] {0, 1, 0, -1};
-const char dir[4] {'D', 'R', 'U', 'L'}, cdir[4] {'S', 'E', 'N', 'W'};
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
+const char dir[4]{'D', 'R', 'U', 'L'}, cdir[4]{'S', 'E', 'N', 'W'};
 
 inline namespace FileIO {
-void setIn(const str &s) {
-    freopen(s.c_str(), "r", stdin);
-}
-void setOut(const str &s) {
-    freopen(s.c_str(), "w", stdout);
-}
+void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
+void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s))
-        setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
 }
 } // namespace FileIO
 
@@ -66,9 +61,7 @@ template <class A, class B> void re(pair<A, B> &p);
 template <class A> void re(vector<A> &v);
 template <class A, size_t SZ> void re(array<A, SZ> &a);
 
-template <class T> void re(T &x) {
-    cin >> x;
-}
+template <class T> void re(T &x) { cin >> x; }
 void re(double &d) {
     string t;
     re(t);
@@ -83,9 +76,7 @@ template <class H, class... T> void re(H &h, T &...t) {
     re(h);
     re(t...);
 }
-template <class A, class B> void re(pair<A, B> &p) {
-    re(p.first, p.second);
-}
+template <class A, class B> void re(pair<A, B> &p) { re(p.first, p.second); }
 template <class A> void re(vector<A> &x) {
     for (auto &i : x)
         re(i);
@@ -124,20 +115,15 @@ bool isWin(int state) {
             return true;
     }
 
-    if (board[0][0] == 1 && board[1][1] == 2 && board[2][2] == 2)
-        return true;
-    if (board[0][0] == 2 && board[1][1] == 2 && board[2][2] == 1)
-        return true;
-    if (board[2][0] == 1 && board[1][1] == 2 && board[0][2] == 2)
-        return true;
-    if (board[2][0] == 2 && board[1][1] == 2 && board[0][2] == 1)
-        return true;
+    if (board[0][0] == 1 && board[1][1] == 2 && board[2][2] == 2) return true;
+    if (board[0][0] == 2 && board[1][1] == 2 && board[2][2] == 1) return true;
+    if (board[2][0] == 1 && board[1][1] == 2 && board[0][2] == 2) return true;
+    if (board[2][0] == 2 && board[1][1] == 2 && board[0][2] == 1) return true;
     return false;
 }
 
 void dfs(int i, int j, int b) {
-    if (visited[i][j][b])
-        return;
+    if (visited[i][j][b]) return;
     visited[i][j][b] = true;
 
     if (board[i][j][0] == 'M' || board[i][j][0] == 'O') {
@@ -148,7 +134,8 @@ void dfs(int i, int j, int b) {
         int cur_char = (b / pow3[idx]) % 3;
         if (cur_char == 0) {
             int new_char = board[i][j][0] == 'M' ? 1 : 2;
-            b = (b % pow3[idx]) + new_char * pow3[idx] + (b - b % pow3[idx + 1]);
+            b = (b % pow3[idx]) + new_char * pow3[idx] +
+                (b - b % pow3[idx + 1]);
 
             if (!visited[i][j][b] && isWin(b)) {
                 ans.insert(b);

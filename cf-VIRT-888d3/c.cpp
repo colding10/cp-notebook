@@ -90,39 +90,33 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
 void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+    int n, k;
+    cin >> n >> k;
+    vi c(n);
+    rep(i, 0, n) {
+        cin >> c[i];
     }
+    int l = 0, r = 0, i = 0, j = n - 1;
+    int kl = k, kr = k;
 
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
-        }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
+    if (c[0] == c[n - 1]) {
+        kl = k / 2;
+        kr = k - kl;
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
+    while (i < n && l < kl) {
+        if (c[i] == c[0]) l++;
+        i++;
     }
-    cout << endl;
+    while (j >= 0 && r < kr) {
+        if (c[j] == c[n - 1]) r++;
+        j--;
+    }
+    if ((i - 1) < (j + 1)) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
+    }
 }
 
 int main() {

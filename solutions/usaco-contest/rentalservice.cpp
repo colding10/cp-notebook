@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -40,7 +39,9 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) {
+        setIn(s + ".in"), setOut(s + ".out");
+    }
 }
 } // namespace FileIO
 
@@ -55,7 +56,6 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -90,49 +90,71 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
+int main() {
+    setIO("rental");
+    int n, m, r;
+    cin >> n >> m >> r;
 
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+    vi milk(n);
+    rep(i, 0, n) {
+        cin >> milk[i];
+    }
+    vpi store(m);
+    rep(i, 0, m) {
+        cin >> store[i].se >> store[i].fi;
     }
 
-    sort(all(b));
-    vi a;
+    vi rent(r);
+    rep(i, 0, r) {
+        cin >> rent[i];
+    }
 
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+    sort(begin(milk), end(milk), greater<int>());
+    sort(begin(store), end(store), greater<pi>());
+    sort(begin(rent), end(rent), greater<int>());
+
+    int shop_i = 0;
+    int rent_i = 0;
+    int cow_i = 0;
+
+    ll ans = 0;
+
+    while (cow_i < n) {
+        int prod = milk[cow_i];
+        
+        int sell_money = 0;
+        int curr_shop = shop_i;
+        int last = 0;
+
+        while (curr_shop < m) {
+            int sold_amt = min(prod, store[curr_shop].se);
+            sell_money += store[curr_shop].fi * sold_amt;
+
+            prod -= sold_amt;
+            
+            if (prod == 0) {
+                last = sold_amt;
+                break;
+            } else {
+                curr_shop++;
+            }
         }
 
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
+        if (rent_i >= r || sell_money > rent[rent_i]) {
+            ans += sell_money;
+            shop_i = curr_shop;
+            if (shop_i < m) {
+                store[shop_i].se -= last; // decrease their willingness to buy
+            }
+            cow_i++;
+        } else {
+            ans += rent[rent_i];
+            n--;
+            rent_i++;
+        }
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
+    cout << ans << endl;
 
-int main() {
-    setIO();
-
-    int tc;
-    cin >> tc;
-    while (tc--) {
-        solve();
-    }
     // you should actually read the stuff at the bottom
 }
 

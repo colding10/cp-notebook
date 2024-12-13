@@ -22,7 +22,6 @@ using vpll = V<pll>;
 #define pb push_back
 #define fi first
 #define se second
-#define endl "\n"
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
@@ -40,7 +39,9 @@ void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
 void setIO(const str &s = "") {
     cin.tie(0)->sync_with_stdio(0);
-    if (sz(s)) setIn(s + ".in"), setOut(s + ".out");
+    if (sz(s)) {
+        setIn(s + ".in"), setOut(s + ".out");
+    }
 }
 } // namespace FileIO
 
@@ -55,7 +56,6 @@ void __print(float x) { cerr << x; }
 void __print(double x) { cerr << x; }
 void __print(long double x) { cerr << x; }
 void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
 void __print(const string &x) { cerr << '\"' << x << '\"'; }
 void __print(bool x) { cerr << (x ? "true" : "false"); }
 
@@ -89,50 +89,63 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #define dbg(x...)
 #endif
 } // namespace Debug
-
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
-void solve() {
-    int n;
-    cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+set<ll> a;
+ll up_bound;
+bool test(ll x) {
+    if (x > up_bound) {
+        return false;
     }
-
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+    set<ll> mods;
+    for (ll mod : a) {
+        mods.insert(mod%x);
+        if (sz(mods) >= 4) {
+            return false;
         }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
+    return true;
 }
-
 int main() {
     setIO();
 
-    int tc;
-    cin >> tc;
-    while (tc--) {
-        solve();
+    ll n;
+    cin >> n;
+    ll ma = INT64_MAX;
+
+    rep(i,0,n) {
+        ll x;
+        cin >> x;
+        ma = min(ma, x);
+        a.insert(x);
     }
+    vll b(begin(a), end(a));
+
+    up_bound = ma/4;
+    if (sz(b) < 4) {
+        cout << up_bound*(up_bound+1)/2 << endl;
+        return 0;
+    }
+    ll ans = 0;
+    set<ll> divs;
+    dbg(b);
+    rep(i, 0, 4) {
+        rep(j, i, 4) {
+            ll diff = abs(b[i]-b[j]);
+            rep(t, 1, ((ll)std::pow((double)diff, (double)0.5) + 1)) {
+                if (diff % (ll)t == 0) {
+                    dbg(t, diff/t);
+                    divs.insert(t);
+                    divs.insert(diff/t);
+                }
+            }
+        }
+    }
+    dbg(divs);
+    for (ll x : divs) {
+        if (test(x)) {
+            ans += x;
+        }
+    }
+    cout << ans << endl;
     // you should actually read the stuff at the bottom
 }
 

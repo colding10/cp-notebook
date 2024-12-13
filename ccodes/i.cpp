@@ -90,39 +90,30 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
 void solve() {
     int n;
     cin >> n;
+    vi a(n+2);
+    a[0] = 0;
+    a[n+2] = 0;
 
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+    rep(i, 1, n+1) {
+        cin >> a[i];
     }
 
-    sort(all(b));
-    vi a;
+    int l = 0;
+    int r = n+1;
 
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+    while (l != r) {
+        if (a[l]>=a[r-1]) {
+            cout<<"B";
+            r--;
+        } else {
+            cout<<"A";
+            l++;
         }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
+    cout<<endl;
 }
 
 int main() {

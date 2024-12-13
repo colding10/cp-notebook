@@ -185,6 +185,10 @@ int main() {
         }
     }
 
+    if (lo > hi) {
+        
+    }
+
     cout << res << endl;
     // you should actually read the stuff at the bottom
 }

@@ -31,10 +31,7 @@ using vpll = V<pll>;
 #define pb push_back
 #define eb emplace_back
 
-#define rep(i, begin, end)                                                     \
-    for (__typeof(end) i = (begin) - ((begin) > (end));                        \
-         i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
-
+#define rep(i, l, r) for (ll(i) = (l); (i) <= (r); ++(i))
 inline namespace FileIO {
 void setIn(const str &s) { freopen(s.c_str(), "r", stdin); }
 void setOut(const str &s) { freopen(s.c_str(), "w", stdout); }
@@ -90,41 +87,51 @@ template <typename T, typename... V> void _print(T t, V... v) {
 #endif
 } // namespace Debug
 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("O3", "unroll-loops")
-#pragma GCC target("avx2", "popcnt")
 void solve() {
-    int n;
+    ll n;
     cin >> n;
-
-    vi b(n * (n - 1) / 2);
-    map<int, int> bc;
-    rep(i, 0, (n * (n - 1) / 2)) {
-        cin >> b[i];
-        bc[b[i]]++;
+    vector<ll> a(n + 1);
+    set<ll> s;
+    rep(i, 1, n)
+        s.insert(i);
+    bool ff = true;
+    rep(i, 1, n - 1) {
+        cin >> a[i];
+        if (a[i] - a[i - 1] > 2 * n - 1) ff = false;
+        s.erase(a[i] - a[i - 1]);
     }
-
-    sort(all(b));
-    vi a;
-
-    int add = n - 1;
-    // dbg(b);
-    rep(i, 0, (n * (n - 1) / 2)) {
-        if (!bc[b[i]]) {
-            continue;
+    if (!ff) {
+        cout << "NO\n";
+        return;
+    }
+    if (s.size() == 1) {
+        cout << "YES\n";
+        return;
+    }
+    if (s.size() > 2) {
+        cout << "NO\n";
+        return;
+    }
+    if (s.size() == 2) {
+        ll sum = 0, cnt = 0;
+        for (auto x : s)
+            sum += x;
+        rep(i, 1, n) {
+            if (sum == a[i] - a[i - 1]) {
+                cnt++;
+            }
         }
-
-        a.pb(b[i]);
-        bc[b[i]] -= add;
-        add--;
+        if (sum > n && cnt == 1) {
+            cout << "YES\n";
+            return;
+        } else if (sum <= n && cnt == 2) {
+            cout << "YES\n";
+            return;
+        }
     }
-    a.pb(b[sz(b) - 1]);
-    rep(i, 0, sz(a)) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
+    cout << "NO\n";
+    return;
 }
-
 int main() {
     setIO();
 
