@@ -33,28 +33,28 @@ local function run_selection(prompt_bufnr, map)
                 content = Filter(content)
             end
 
-            vim.fn.append(vim.fn.line("."), content)
+            -- insert content properly without leaving blank lines
+            local buf = 0
+            local row = vim.api.nvim_win_get_cursor(0)[1] - 1
+            if vim.api.nvim_buf_get_lines(buf, row, row + 1, false)[1]:match("^%s*$") then
+                vim.api.nvim_buf_set_lines(buf, row, row + 1, false, content)
+            else
+                vim.api.nvim_buf_set_lines(buf, row + 1, row + 1, false, content)
+            end
         end
-
     end)
     return true
 end
 
 local function AlgDS()
-    local file = require("telescope.builtin").find_files({
+    require("telescope.builtin").find_files({
         cwd = template_dir,
         previewer = true,
         attach_mappings = run_selection
     })
 end
 
--- Creates an object for the module. All of the module's
--- functions are associated with this object, which is
--- returned when the module is called with `require`.
 local M = {}
-
--- Routes calls made to this module to functions in the
--- plugin's other modules.
 M.run = AlgDS
 
 return M

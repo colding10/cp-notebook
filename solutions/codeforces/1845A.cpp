@@ -1,20 +1,11 @@
 #include <algorithm>
 #include <array>
-#include <bitset>
 #include <cassert>
 #include <chrono>
-#include <climits>
 #include <cmath>
-#include <complex>
 #include <cstring>
-#include <functional>
-#include <iomanip>
 #include <iostream>
-#include <map>
-#include <numeric>
-#include <queue>
 #include <random>
-#include <set>
 #include <vector>
 
 using namespace std;
@@ -73,7 +64,7 @@ template <class T> bool ckmax(T &a, T &b) {
 
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define F0R(i, a) FOR(i, 0, a)
-#define ROF(i, a, b) for (int i = (b)-1; i >= (a); --i)
+#define ROF(i, a, b) for (int i = (b) - 1; i >= (a); --i)
 #define R0F(i, a) ROF(i, 0, a)
 #define rep(a) F0R(_, a)
 #define each(a, x) for (auto &a : x)

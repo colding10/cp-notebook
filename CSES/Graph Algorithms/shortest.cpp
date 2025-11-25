@@ -1,9 +1,14 @@
-vector<long long>
-dijkstra(vector<vector<pair<int, long long>>> const &adj,
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long int;
+
+std::vector<long long>
+dijkstra(std::vector<std::vector<std::pair<int, long long>>> const &adj,
          int v0) {
     int n = adj.size();
-    vector<long long> cost(n, -1);
-    priority_queue<pair<long long, int>> pq;
+    std::vector<long long> cost(n, -1);
+    std::priority_queue<std::pair<long long, int>> pq;
     pq.push({0, v0});
     cost[v0] = 0;
     while (!pq.empty()) {
@@ -22,4 +27,10 @@ dijkstra(vector<vector<pair<int, long long>>> const &adj,
         }
     }
     return cost;
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
 }
