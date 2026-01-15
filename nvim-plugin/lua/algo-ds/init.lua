@@ -5,15 +5,30 @@ local action_state = require "telescope.actions.state"
 
 local function Filter(lines)
     local filteredLines = {}
-    local skipping = true
+    local start_index = 1
 
-    for _, line in ipairs(lines) do
-        if skipping and not (line:match("^%s*#") or line == "using namespace std;") then
-            skipping = false
+    -- Look for delimiter comment (e.g., "// ---") to mark end of preamble
+    for i, line in ipairs(lines) do
+        if line:match("^%s*// ?%-%-%-") then
+            start_index = i + 1
+            break
         end
+    end
 
-        if not skipping then
-            table.insert(filteredLines, line)
+    -- If no delimiter found, fall back to old behavior: skip #includes and using namespace std;
+    if start_index == 1 then
+        local skipping = true
+        for _, line in ipairs(lines) do
+            if skipping and not (line:match("^%s*#") or line == "using namespace std;" or line == "typedef long long ll;") then
+                skipping = false
+            end
+            if not skipping then
+                table.insert(filteredLines, line)
+            end
+        end
+    else
+        for i = start_index, #lines do
+            table.insert(filteredLines, lines[i])
         end
     end
 
@@ -29,7 +44,7 @@ local function run_selection(prompt_bufnr, map)
             local file_path = template_dir .. "/" .. file[1]
             local content = vim.fn.readfile(file_path)
 
-            if not string.find(file[1], "template") then
+            if not (string.find(file[1], "template") or string.find(file[1], "preamble")) then
                 content = Filter(content)
             end
 
