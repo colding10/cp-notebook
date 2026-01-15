@@ -1,6 +1,4 @@
-#include <algorithm>
-#include <complex>
-#include <vector>
+
 
 constexpr int power(int x, int e) {
     return e ? x * power(x, e - 1) : 1;

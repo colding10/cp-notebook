@@ -1,16 +1,15 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 template <typename T = long long> class BIT {
-    // Implementation of a Binary Indexed Tree (Fenwick Tree)
-public:
-    BIT(int n) : n(n + 1) {
-        m_array = std::vector<T>(this->n, 0);
-    }
+  public:
+    BIT(int n) : n(n + 1) { m_array = vector<T>(this->n, 0); }
 
-    BIT(const std::vector<T> &list) {
+    BIT(const vector<T> &list) {
         // Initialize BIT with list in O(n)
-        m_array = std::vector<T>(n, 0);
-        std::copy(list.begin(), list.end(), m_array.begin() + 1);
+        m_array = vector<T>(n, 0);
+        copy(list.begin(), list.end(), m_array.begin() + 1);
 
         for (int idx = 1; idx < n; idx++) {
             int idx2 = idx + (idx & -idx);
@@ -30,9 +29,7 @@ public:
     }
 
     // Computes the range sum of the range [l, r)
-    int range_query(int l, int r) {
-        return prefix_query(r) - prefix_query(l);
-    }
+    int range_query(int l, int r) { return prefix_query(r) - prefix_query(l); }
 
     // Add a value to the idx-th element
     void update(int idx, int add) {
@@ -41,7 +38,7 @@ public:
         }
     }
 
-private:
-    std::vector<T> m_array;
+  private:
+    vector<T> m_array;
     int n;
 };

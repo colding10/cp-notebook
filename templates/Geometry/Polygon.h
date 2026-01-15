@@ -1,7 +1,7 @@
 #include "Geometry.h"
-#include <vector>
+using namespace std;
 
-template <typename T> double signedArea(std::vector<Point<T>> polygon) {
+template <typename T> double signedArea(vector<Point<T>> polygon) {
     auto translate = Point<T> {0, 0} - polygon[0];
     for (auto &p : polygon)
         p += translate;
@@ -15,7 +15,7 @@ template <typename T> double signedArea(std::vector<Point<T>> polygon) {
     return area / 2;
 }
 
-Point<double> centerOfGravity(std::vector<Point<double>> polygon) {
+Point<double> centerOfGravity(vector<Point<double>> polygon) {
     auto translate = Point<double> {0, 0} - polygon[0];
     for (auto &p : polygon)
         p += translate;

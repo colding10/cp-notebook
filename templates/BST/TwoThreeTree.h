@@ -1,7 +1,7 @@
 #include <array>
 
 template <typename T> class TwoThreeTreeNode {
-public:
+  public:
     TwoThreeTreeNode(T elem) {
         elements[0] = elem;
         size = 1;
@@ -27,7 +27,8 @@ public:
             if (!three_node) {
                 auto child_left = children[idx];
                 child_left->size = 1;
-                auto child_right = new TwoThreeTreeNode<T>(child_left->elements[2]);
+                auto child_right =
+                    new TwoThreeTreeNode<T>(child_left->elements[2]);
                 child_right->children[0] = child_left->children[2];
                 child_left->children[2] = nullptr;
                 child_right->children[1] = child_left->children[3];
@@ -49,24 +50,19 @@ public:
     bool contains(T elem) {
         if (isLeaf()) {
             for (int i = 0; i < size; i++) {
-                if (elem == elements[i])
-                    return true;
+                if (elem == elements[i]) return true;
             }
             return false;
         } else {
             for (int i = size - 1; i >= 0; i--) {
-                if (elem > elements[i])
-                    return children[i + 1]->contains(elem);
-                if (elem == elements[i])
-                    return true;
+                if (elem > elements[i]) return children[i + 1]->contains(elem);
+                if (elem == elements[i]) return true;
             }
             return children[0]->contains(elem);
         }
     }
 
-    bool isLeaf() {
-        return children[0] == nullptr;
-    }
+    bool isLeaf() { return children[0] == nullptr; }
 
     std::array<T, 3> elements;
     int size;
@@ -74,14 +70,15 @@ public:
 };
 
 template <typename T> class TwoThreeTree {
-public:
+  public:
     void insert(T elem) {
         if (root) {
             bool three_node = root->insert(elem);
             if (!three_node) {
                 auto child_left = root;
                 child_left->size = 1;
-                auto child_right = new TwoThreeTreeNode<T>(child_left->elements[2]);
+                auto child_right =
+                    new TwoThreeTreeNode<T>(child_left->elements[2]);
                 child_right->children[0] = child_left->children[2];
                 child_left->children[2] = nullptr;
                 child_right->children[1] = child_left->children[3];
@@ -105,7 +102,7 @@ public:
             return false;
     }
 
-private:
+  private:
     TwoThreeTreeNode<T> *root = nullptr;
     int height = 0;
 };

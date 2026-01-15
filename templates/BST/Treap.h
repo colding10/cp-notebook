@@ -8,12 +8,8 @@ struct Node {
     void recalc();
 };
 
-int cnt(Node *n) {
-    return n ? n->c : 0;
-}
-void Node::recalc() {
-    c = cnt(l) + cnt(r) + 1;
-}
+int cnt(Node *n) { return n ? n->c : 0; }
+void Node::recalc() { c = cnt(l) + cnt(r) + 1; }
 
 template <class F> void each(Node *n, F f) {
     if (n) {
@@ -24,8 +20,7 @@ template <class F> void each(Node *n, F f) {
 }
 
 pair<Node *, Node *> split(Node *n, int k) {
-    if (!n)
-        return {};
+    if (!n) return {};
     if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
         auto pa = split(n->l, k);
         n->l = pa.second;
@@ -40,10 +35,8 @@ pair<Node *, Node *> split(Node *n, int k) {
 }
 
 Node *merge(Node *l, Node *r) {
-    if (!l)
-        return r;
-    if (!r)
-        return l;
+    if (!l) return r;
+    if (!r) return l;
     if (l->y > r->y) {
         l->r = merge(l->r, r);
         l->recalc();

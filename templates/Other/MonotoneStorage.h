@@ -1,16 +1,16 @@
-#include <map>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 template <typename T, typename S> class MonotoneStorage {
-public:
+  public:
     void insert(T x, S y) {
         auto it = storage.upper_bound(x);
         if (it != storage.begin()) {
             auto prev = it;
             --prev;
-            if (prev->second >= y)
-                return;
-            if (it->first == x)
-                it = prev;
+            if (prev->second >= y) return;
+            if (it->first == x) it = prev;
         }
 
         auto ti = it;
@@ -23,12 +23,11 @@ public:
 
     S max_upto(T x) {
         auto it = storage.upper_bound(x);
-        if (it == storage.begin())
-            return 0;
+        if (it == storage.begin()) return 0;
         --it;
         return it->second;
     }
 
-private:
-    std::map<T, S> storage;
+  private:
+    map<T, S> storage;
 };

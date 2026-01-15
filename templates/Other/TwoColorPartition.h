@@ -1,19 +1,17 @@
-#include <set>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 struct Interval {
     int l, r, color;
-    bool operator<(const Interval &o) const {
-        return l < o.l;
-    }
+    bool operator<(const Interval &o) const { return l < o.l; }
 };
 
 class TwoColorPartition {
-public:
-    TwoColorPartition(int n) {
-        s.insert({0, n - 1, 0});
-    }
+  public:
+    TwoColorPartition(int n) { s.insert({0, n - 1, 0}); }
 
-    using It = std::set<Interval>::iterator;
+    using It = set<Interval>::iterator;
 
     void split(int x) {
         // x becomes the left border of interval
@@ -27,7 +25,7 @@ public:
         }
     }
 
-    std::pair<It, It> get_iterators(int l, int r) {
+    pair<It, It> get_iterators(int l, int r) {
         split(l);
         split(r + 1);
         return {s.lower_bound({l, 0, 0}), s.upper_bound({r, 0, 0})};
@@ -42,6 +40,6 @@ public:
         s.insert({l, r, c});
     }
 
-private:
-    std::set<Interval> s;
+  private:
+    set<Interval> s;
 };

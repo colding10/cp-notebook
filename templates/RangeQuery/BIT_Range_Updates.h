@@ -1,14 +1,14 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 template <typename T = long long> class BIT_Range_Updates {
-public:
-    BIT_Range_Updates(int n) : n(n + 1) {
-        m_array.resize(n + 1, 0);
-    }
+  public:
+    BIT_Range_Updates(int n) : n(n + 1) { m_array.resize(n + 1, 0); }
 
-    BIT_Range_Updates(const std::vector<T> &list) : n(list.size() + 1) {
+    BIT_Range_Updates(const vector<T> &list) : n(list.size() + 1) {
         n = list.size() + 1;
-        m_array = std::vector<T>(n, 0);
+        m_array = vector<T>(n, 0);
         for (int i = 0; i < n; i++)
             m_array[i + 1] = list[i] - (i > 0 ? list[i - 1] : 0);
 
@@ -39,7 +39,7 @@ public:
             m_array[idx] += add;
     }
 
-private:
-    std::vector<T> m_array;
+  private:
+    vector<T> m_array;
     int n;
 };

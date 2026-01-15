@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-using ll = long long int;
+typedef long long ll;
 
 int main() {
-
+    cin.tie(nullptr)->sync_with_stdio(false);
 }
+// look at the paper instead of staring here

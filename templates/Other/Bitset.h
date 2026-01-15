@@ -1,7 +1,9 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 class Bitset {
-public:
+  public:
     Bitset(int n = 0) : data((n + 63) / 64) {}
     Bitset(Bitset const &o) : data(o.data) {}
 
@@ -11,18 +13,13 @@ public:
         return *this;
     }
 
-    bool check(int idx) const {
-        return data[idx / 64] & (1LL << (idx % 64));
-    }
+    bool check(int idx) const { return data[idx / 64] & (1LL << (idx % 64)); }
 
-    void set(int idx) {
-        data[idx / 64] |= (1LL << (idx % 64));
-    }
+    void set(int idx) { data[idx / 64] |= (1LL << (idx % 64)); }
 
     int first_set() const {
         for (auto i = 0u; i < data.size(); i++) {
-            if (data[i] == 0)
-                continue;
+            if (data[i] == 0) continue;
             int idx = 64 * i;
             auto bits = data[i];
             while (!(bits & 1)) {
@@ -34,6 +31,6 @@ public:
         return -1;
     }
 
-private:
-    std::vector<long long> data;
+  private:
+    vector<ll> data;
 };

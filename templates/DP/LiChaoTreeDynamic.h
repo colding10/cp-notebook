@@ -1,27 +1,25 @@
-#include <algorithm>
-#include <limits>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+// ---
 
 struct Line {
-    long long k, d;
+    ll k, d;
 
-    long long eval(int x) {
-        return k * x + d;
-    }
+    ll eval(int x) { return k * x + d; }
 };
 
 class LiChaoNode {
-public:
+  public:
     LiChaoNode(Line line) : line(line) {}
 
     void add_line(Line new_line, int l, int r) {
         int m = (l + r) / 2;
         bool left_smaller = new_line.eval(l) < line.eval(l);
         bool middle_smaller = new_line.eval(m) < line.eval(m);
-        if (middle_smaller)
-            std::swap(line, new_line);
+        if (middle_smaller) std::swap(line, new_line);
 
-        if (r - l == 1)
-            return;
+        if (r - l == 1) return;
 
         if (left_smaller != middle_smaller) {
             if (left == nullptr)
@@ -36,52 +34,43 @@ public:
         }
     }
 
-    long long get_minimum(int x, int l, int r) {
-        long long val = line.eval(x);
+    ll get_minimum(int x, int l, int r) {
+        ll val = line.eval(x);
         int m = (l + r) / 2;
         if (r - l > 1) {
             if (x < m && left != nullptr)
-                val = std::min(val, left->get_minimum(x, l, m));
+                val = min(val, left->get_minimum(x, l, m));
             if (x >= m && right != nullptr)
-                    val = std::min(val, right->get_minimum(x, m, r));
+                val = min(val, right->get_minimum(x, m, r));
         }
         return val;
     }
 
     void extinguish() {
-        if (left != nullptr)
-            left->extinguish();
-        if (right != nullptr)
-            right->extinguish();
+        if (left != nullptr) left->extinguish();
+        if (right != nullptr) right->extinguish();
         delete this;
     }
 
-private:
+  private:
     Line line;
-    LiChaoNode* left = nullptr;
-    LiChaoNode* right = nullptr;
+    LiChaoNode *left = nullptr;
+    LiChaoNode *right = nullptr;
 };
 
-class LiChaoTree
-{
-public:
+class LiChaoTree {
+  public:
     LiChaoTree(int mi, int ma) : mi(mi), ma(ma) {
-        root = new LiChaoNode({0, std::numeric_limits<long long>::max() / 2});
+        root = new LiChaoNode({0, std::numeric_limits<ll>::max() / 2});
     }
 
-    ~LiChaoTree() {
-        root->extinguish();
-    }
+    ~LiChaoTree() { root->extinguish(); }
 
-    void add_line(Line line) {
-        root->add_line(line, mi, ma + 1);
-    }
+    void add_line(Line line) { root->add_line(line, mi, ma + 1); }
 
-    long long get_minimum(int x) {
-        return root->get_minimum(x, mi, ma + 1);
-    }
+    ll get_minimum(int x) { return root->get_minimum(x, mi, ma + 1); }
 
-private:
+  private:
     int mi, ma;
-    LiChaoNode* root;
+    LiChaoNode *root;
 };

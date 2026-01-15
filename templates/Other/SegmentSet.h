@@ -1,6 +1,6 @@
-#include <iostream>
-#include <set>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 struct Segment {
     int l, r;
@@ -10,7 +10,7 @@ struct Segment {
     }
 
     int overlap(Segment const &o) const {
-        return std::max(0, std::min(r, o.r) - std::max(l, o.l));
+        return max(0, min(r, o.r) - max(l, o.l));
     }
 
     bool touch(Segment const &o) const {
@@ -18,14 +18,14 @@ struct Segment {
     }
 
     Segment Union(Segment const o) const {
-        return {std::min(l, o.l), std::max(r, o.r)};
+        return {min(l, o.l), max(r, o.r)};
     }
 
-    friend std::ostream &operator<<(std::ostream &os, Segment const &s) {
+    friend ostream &operator<<(ostream &os, Segment const &s) {
         return os << "[" << s.l << ", " << s.r << "]";
     }
 
-    friend std::istream &operator>>(std::istream &is, Segment &s) {
+    friend istream &operator>>(istream &is, Segment &s) {
         return is >> s.l >> s.r;
     }
 };
@@ -38,8 +38,8 @@ struct Segment {
 class DisjointSegmentSet {
 public:
     DisjointSegmentSet(bool touching = true) : touching(touching) {}
-    using It = std::set<Segment>::iterator;
-    using ItRange = std::pair<It, It>;
+    using It = set<Segment>::iterator;
+    using ItRange = pair<It, It>;
 
     /**
      * add a segment to the set, union with overlapping/touching segments
@@ -57,11 +57,11 @@ public:
     /**
      * remove a segment from the set, return the overlaps
      */
-    std::vector<Segment> subtract(Segment s) {
+    vector<Segment> subtract(Segment s) {
         split(s.l);
         split(s.r);
         auto [lit, rit] = get_overlapping(s);
-        std::vector<Segment> ret(lit, rit);
+        vector<Segment> ret(lit, rit);
         segments.erase(lit, rit);
         return ret;
     }
@@ -80,7 +80,7 @@ public:
         return lit;
     }
 
-    friend std::ostream &operator<<(std::ostream &os,
+    friend ostream &operator<<(ostream &os,
                                     DisjointSegmentSet const &dss) {
         os << "DSS(";
         auto bit = dss.segments.begin();
@@ -129,5 +129,5 @@ private:
     }
 
     bool touching;
-    std::set<Segment> segments;
+    set<Segment> segments;
 };

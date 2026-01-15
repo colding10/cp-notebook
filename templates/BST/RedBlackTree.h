@@ -1,6 +1,6 @@
 
 template <typename T> class RedBlackTreeNode {
-public:
+  public:
     RedBlackTreeNode(T elem)
         : elem(elem), left(nullptr), right(nullptr), color(Color::red) {}
 
@@ -34,8 +34,7 @@ public:
     }
 
     static bool isRed(RedBlackTreeNode<T> *node) {
-        if (node == nullptr)
-            return false;
+        if (node == nullptr) return false;
         return node->color == Color::red;
     }
 
@@ -48,18 +47,15 @@ public:
         else
             node->right = insert(node->right, elem);
 
-        if (!isRed(node->left) && isRed(node->right))
-            node = rotateLeft(node);
+        if (!isRed(node->left) && isRed(node->right)) node = rotateLeft(node);
 
-        if (isRed(node->left) && isRed(node->right))
-            flipColors(node);
+        if (isRed(node->left) && isRed(node->right)) flipColors(node);
 
         return node;
     }
 
     static bool contains(RedBlackTreeNode *node, T elem) {
-        if (node == nullptr)
-            return false;
+        if (node == nullptr) return false;
 
         if (elem < node->elem)
             return contains(node->left, elem);
@@ -69,7 +65,7 @@ public:
             return contains(node->right, elem);
     }
 
-private:
+  private:
     enum Color { black, red };
 
     T elem;
@@ -78,7 +74,7 @@ private:
 };
 
 template <typename T> class RedBlackTree {
-public:
+  public:
     RedBlackTree() : root(nullptr) {}
 
     void insert(T elem) {
@@ -97,6 +93,6 @@ public:
         }
     }
 
-private:
+  private:
     RedBlackTreeNode<T> *root;
 };

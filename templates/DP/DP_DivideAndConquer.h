@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+using namespace std;
+// ---
 
 int dp[21][4001];
 
@@ -10,7 +12,7 @@ void solve(int k, int l, int r, int optl, int optr) {
     int m = (l + r) >> 1;
     int opt = optl;
     int best_value = std::numeric_limits<int>::max();
-    for (int i = optl; i <= std::min(optr, m); i++) {
+    for (int i = optl; i <= min(optr, m); i++) {
         int value = dp[k - 1][i - 1] + f(i, m);
         if (value < best_value) {
             opt = i;

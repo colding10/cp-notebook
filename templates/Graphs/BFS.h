@@ -1,13 +1,13 @@
-#include <queue>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-std::vector<std::vector<int>> adj;
+vector<vector<int>> adj;
 
-std::vector<int> bfs(int start) {
+vector<int> bfs(int start) {
     int n = adj.size();
-    std::vector<bool> found(n, false);
-    std::queue<std::pair<int, int>> q;
-    std::vector<int> dist_to_start(n);
+    vector<bool> found(n, false);
+    queue<pair<int, int>> q;
+    vector<int> dist_to_start(n);
 
     q.push({start, 0});
     found[start] = true;

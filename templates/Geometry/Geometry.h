@@ -1,7 +1,5 @@
-#include <cmath>
-#include <iostream>
-#include <numeric>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 constexpr double EPS = 1e-9;
 
@@ -9,12 +7,10 @@ template <class T> T det(T a11, T a12, T a21, T a22) {
     return a11 * a22 - a12 * a21;
 }
 
-template <class T> T sq(T x) {
-    return x * x;
-}
+template <class T> T sq(T x) { return x * x; }
 
 template <class T> class Vector2D {
-public:
+  public:
     Vector2D(T x = 0, T y = 0) : x(x), y(y) {}
 
     Vector2D &operator+=(Vector2D const &v) {
@@ -58,32 +54,20 @@ public:
         return u;
     }
     bool operator==(Vector2D const &v) const {
-        return std::abs(x - v.x) < EPS && std::abs(y - v.y) < EPS;
+        return abs(x - v.x) < EPS && abs(y - v.y) < EPS;
     }
-    bool operator!=(Vector2D const &v) const {
-        return !(*this == v);
-    }
+    bool operator!=(Vector2D const &v) const { return !(*this == v); }
     bool operator<(Vector2D const &v) const {
         return x < v.x || (x == v.x && y < v.y);
     }
-    T operator*(Vector2D const &v) const {
-        return x * v.x + y * v.y;
-    }
-    T operator[](int idx) const {
-        return idx ? y : x;
-    }
+    T operator*(Vector2D const &v) const { return x * v.x + y * v.y; }
+    T operator[](int idx) const { return idx ? y : x; }
 
-    T length2() const {
-        return sq(x) + sq(y);
-    }
+    T length2() const { return sq(x) + sq(y); }
 
-    double length() const {
-        return sqrt(length2());
-    }
+    double length() const { return sqrt(length2()); }
 
-    double atan2_angle() const {
-        return atan2(y, x);
-    }
+    double atan2_angle() const { return atan2(y, x); }
 
     void normalize() {
         double l = length();
@@ -94,10 +78,8 @@ public:
     double angle(Vector2D const &v) const {
         double angle = v.atan2_angle() - atan2_angle();
         const double PI = acos(-1);
-        if (angle > PI)
-            angle -= PI;
-        if (angle <= -PI)
-            angle += PI;
+        if (angle > PI) angle -= PI;
+        if (angle <= -PI) angle += PI;
         return angle;
     }
 
@@ -105,18 +87,19 @@ public:
 };
 
 template <>
-bool Vector2D<long long>::operator==(Vector2D<long long> const &v) const {
+inline bool
+Vector2D<long long>::operator==(Vector2D<long long> const &v) const {
     return x == v.x && y == v.y;
 }
 
-template <> void Vector2D<long long>::normalize() {
-    long long g = std::gcd(x, y);
+template <> inline void Vector2D<long long>::normalize() {
+    long long g = gcd(x, y);
     x /= g;
     y /= g;
 }
 
 template <class T> class Point2D {
-public:
+  public:
     Point2D(T x = 0, T y = 0) : x(x), y(y) {}
 
     Point2D &operator+=(Vector2D<T> const &v) {
@@ -139,34 +122,30 @@ public:
         p -= v;
         return p;
     }
-    Vector2D<T> operator-(Point2D const &p) const {
-        return {x - p.x, y - p.y};
-    }
+    Vector2D<T> operator-(Point2D const &p) const { return {x - p.x, y - p.y}; }
     bool operator==(Point2D const &p) {
-        return std::abs(x - p.x) < EPS && std::abs(y - p.y) < EPS;
+        return abs(x - p.x) < EPS && abs(y - p.y) < EPS;
     }
-    bool operator!=(Point2D const &p) const {
-        return !(*this == p);
-    }
+    bool operator!=(Point2D const &p) const { return !(*this == p); }
     bool operator<(Point2D const &p) const {
         return x < p.x || (x == p.x && y < p.y);
     }
-    friend std::istream &operator>>(std::istream &is, Point2D<T> &pt) {
+    friend istream &operator>>(istream &is, Point2D<T> &pt) {
         return is >> pt.x >> pt.y;
     }
-    friend std::ostream &operator<<(std::ostream &os, Point2D<T> const &pt) {
+    friend ostream &operator<<(ostream &os, Point2D<T> const &pt) {
         return os << pt.x << " " << pt.y;
     }
 
     T x, y;
 };
 
-template <> bool Point2D<long long>::operator==(Point2D const &p) {
+template <> inline bool Point2D<long long>::operator==(Point2D const &p) {
     return x == p.x && y == p.y;
 }
 
 template <class T> class Line2D {
-public:
+  public:
     // ax + by + c = 0
     Line2D(T a, T b, T c) : a(a), b(b), c(c) {}
     // y = kx + d
@@ -179,7 +158,7 @@ public:
         : a(-v.y), b(v.x), c(p.x * v.y - p.y * v.x) {}
 
     bool parallel(Line2D const &other) const {
-        return std::abs(det(a, b, other.a, other.b)) < EPS;
+        return abs(det(a, b, other.a, other.b)) < EPS;
     }
 
     Point2D<T> intersect(Line2D const &other) const {
@@ -190,28 +169,28 @@ public:
     }
 
     double distance(Point2D<T> const &p) const {
-        return std::abs(a * p.x + b * p.y + c) / Vector2D<T>(a, b).length();
+        return abs(a * p.x + b * p.y + c) / Vector2D<T>(a, b).length();
     }
 
     virtual bool contains(Point2D<T> const &p) const {
-        return std::abs(a * p.x + b * p.y + c) < EPS;
+        return abs(a * p.x + b * p.y + c) < EPS;
     }
 
     T a, b, c;
 };
 
 template <>
-bool Line2D<long long>::parallel(Line2D<long long> const &other) const {
+inline bool Line2D<long long>::parallel(Line2D<long long> const &other) const {
     return det(a, b, other.a, other.b) == 0;
 }
 
 template <>
-bool Line2D<long long>::contains(Point2D<long long> const &p) const {
+inline bool Line2D<long long>::contains(Point2D<long long> const &p) const {
     return a * p.x + b * p.y + c == 0;
 }
 
 template <class T> class Segment2D : public Line2D<T> {
-public:
+  public:
     Segment2D(Point2D<T> p, Point2D<T> q) : Line2D<T>(p, q), p(p), q(q) {}
 
     bool between_1d(T const x, T const b1, T const b2) const {
@@ -228,16 +207,14 @@ public:
 };
 
 template <class T> class Circle2D {
-public:
+  public:
     Circle2D(Point2D<T> m, T r) : m(m), r(r) {}
     Circle2D(T r) : m({0, 0}), r(r) {}
 
-    bool inside(Point2D<T> p) {
-        return (p - m).length2() < r * r;
-    }
+    bool inside(Point2D<T> p) { return (p - m).length2() < r * r; }
 
-    std::vector<Point2D<T>> intersect(Line2D<T> line) {
-        std::vector<Point2D<T>> intersections;
+    vector<Point2D<T>> intersect(Line2D<T> line) {
+        vector<Point2D<T>> intersections;
         T a = line.a;
         T b = line.b;
         T c = a * m.x + b * m.y + line.c;
@@ -248,21 +225,21 @@ public:
         if (diff > EPS) {
             double d = sq(r) - sq(c) / d2;
             double factor = sqrt(d / d2);
-            intersections.push_back(closest + Vector2D<T> {b, -a} * factor);
-            intersections.push_back(closest + Vector2D<T> {-b, a} * factor);
-        } else if (std::abs(diff) <= EPS) {
+            intersections.push_back(closest + Vector2D<T>{b, -a} * factor);
+            intersections.push_back(closest + Vector2D<T>{-b, a} * factor);
+        } else if (abs(diff) <= EPS) {
             intersections.push_back(closest);
         }
 
         for (auto &p : intersections)
-            p += Vector2D<T> {m.x, m.y};
+            p += Vector2D<T>{m.x, m.y};
         return intersections;
     }
 
-    std::vector<Point2D<T>> intersect(Circle2D other) {
+    vector<Point2D<T>> intersect(Circle2D other) {
         Line2D<T> line(2 * (other.m.x - m.x), 2 * (other.m.y - m.y),
                        sq(other.r) - sq(r) + sq(m.x) + sq(m.y) - sq(other.m.x) -
-                       sq(other.m.y));
+                           sq(other.m.y));
         return intersect(line);
     }
 
