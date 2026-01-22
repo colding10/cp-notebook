@@ -1,9 +1,7 @@
-#include <string>
-#include <vector>
-
+// ---
 class Hashing {
 public:
-    Hashing(std::string const &s, int p = 31, int mod = 1'000'000'007)
+    Hashing(string const &s, int p = 31, int mod = 1'000'000'007)
         : mod(mod) {
         psum.push_back(0);
         long long power = 1;
@@ -12,7 +10,6 @@ public:
         for (char c : s) {
             psum.push_back((psum.back() + power * (c - 'a' + 1)) % mod);
             power = power * p % mod;
-            ;
             inv_powers.push_back(inv_powers.back() * inv % mod);
         }
     }
@@ -38,7 +35,7 @@ private:
         return result;
     }
 
-    std::vector<int> psum;
-    std::vector<int> inv_powers;
+    vector<int> psum;
+    vector<int> inv_powers;
     int mod;
 };

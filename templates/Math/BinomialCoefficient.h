@@ -1,10 +1,9 @@
-#include <vector>
-
+// ---
 int MOD = 1'000'000'009;
-std::vector<std::vector<long long>> binomial;
+vector<vector<long long>> binomial;
 
 void precompute_binomial_coefficients(int ma) {
-    binomial.assign(ma + 1, std::vector<long long>(ma + 1));
+    binomial.assign(ma + 1, vector<long long>(ma + 1));
     for (int n = 0; n <= ma; n++) {
         binomial[n][0] = 1;
         binomial[n][n] = 1;

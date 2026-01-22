@@ -19,7 +19,7 @@ struct DisjointSets {
 
 		if (x_root == y_root) { return false; }
 
-		if (sizes[x_root] < sizes[y_root]) { std::swap(x_root, y_root); }
+		if (sizes[x_root] < sizes[y_root]) { swap(x_root, y_root); }
 		sizes[x_root] += sizes[y_root];
 		parents[y_root] = x_root;
 		connected_comps--;

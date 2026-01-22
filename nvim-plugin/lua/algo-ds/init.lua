@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local template_dir = "/Users/colin/cp-notebook/templates"
 
 local actions = require "telescope.actions"
@@ -19,7 +20,7 @@ local function Filter(lines)
     if start_index == 1 then
         local skipping = true
         for _, line in ipairs(lines) do
-            if skipping and not (line:match("^%s*#") or line == "using namespace std;" or line == "typedef long long ll;") then
+            if skipping and not (line:match("^%s*#") or line:match("^%s*using namespace std;%s*$") or line:match("^%s*typedef long long ll;%s*$")) then
                 skipping = false
             end
             if not skipping then
@@ -35,12 +36,12 @@ local function Filter(lines)
     return filteredLines
 end
 
-local function run_selection(prompt_bufnr, map)
+local function run_selection(prompt_bufnr, _)
     actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local file = action_state.get_selected_entry()
 
-        if #file > 0 then
+        if file then
             local file_path = template_dir .. "/" .. file[1]
             local content = vim.fn.readfile(file_path)
 
