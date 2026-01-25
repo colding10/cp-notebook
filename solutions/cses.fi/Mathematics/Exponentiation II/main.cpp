@@ -1,27 +1,37 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
-long long binpow(long long x, long long n, long long m) {
-    x %= m;
-    long long res = 1;
-    while (n > 0) {
-        if (n % 2 == 1) {
-            res = res * x % m;
-        }
-        x = x * x % m;
-        n /= 2;
+ll MOD = 1e9 + 7;
+
+int power(ll base, ll e, ll M = MOD) {
+    ll result = 1;
+    base %= M;
+    while (e) {
+        if (e & 1)
+            result = (result * base) % M;
+        base = (base * base) % M;
+        e >>= 1;
     }
-    return res;
+    return result;
+}
+
+void solve() {
+    ll a, b, c;
+    cin >> a >> b >> c;
+
+    ll exp = power(b, c, MOD - 1);
+    ll ans = power(a, exp, MOD);
+
+    cout << ans << endl;
 }
 
 int main() {
-    int t;
-    cin >> t;
+    cin.tie(nullptr)->sync_with_stdio(false);
 
-    for (int i = 0; i < t; i++) {
-        long long a, b, c;
-        cin >> a >> b >> c;
-        cout << binpow(a, binpow(b, c, 1000000007), 1000000007) << endl;
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        solve();
     }
 }
