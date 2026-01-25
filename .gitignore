@@ -445,3 +445,16 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/vim,macos,windows,linux,visualstudiocode,homebrew,cmake,tex
+
+# Compiled binaries
+a.out
+*.dSYM/
+*.o
+*.exe
+*.class
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
