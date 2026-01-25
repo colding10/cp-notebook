@@ -1,1 +1,0 @@
-{"name":"Local: main","url":"/Users/colinding/Documents/2023 USACO Feb/P2. Cow-Libi/main.cpp","tests":[{"id":1677255508699,"input":"2 4\n0 0 100\n50 0 200\n0 50 50\n1000 1000 0\n50 0 200\n10 0 170","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/colinding/Documents/2023 USACO Feb/P2. Cow-Libi/main.cpp","group":"local","local":true}

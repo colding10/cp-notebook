@@ -1,0 +1,18 @@
+# Compiled binaries
+a.out
+*.bin
+*.o
+*.exe
+main
+*.dSYM/
+
+# IDE/Editor configs
+.cph/
+.vscode/
+
+# Test data (can be downloaded from usaco.org)
+*.in
+*.out
+
+# Status files
+*.status
