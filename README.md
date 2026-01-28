@@ -31,11 +31,11 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 ├── solutions                     [solutions to various online judges]
 │   ├── codeforces                all of my codeforces solutions
 │   ├── cses.fi                   all of my cses solutions
-│   ├── usaco-contest             usaco solutions (needs organizing)
-│   └── usaco-training            usaco training (needs organizing)
+│   ├── usaco-contest             usaco solutions 
+│   └── usaco-training            usaco training 
 │
 └── templates                     [where i keep my templates]
-    ├── Main                      [the basic templates (i dont use one these days)]
+    ├── Main                      [generic templates]
     │   ├── basic_types.h
     │   ├── ckmin_max.h
     │   ├── long-template.cpp
