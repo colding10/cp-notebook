@@ -1,7 +1,5 @@
-#include <cassert>
-#include <limits>
-#include <queue>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Edge {
     int from, to, cost, capacity;
@@ -9,17 +7,17 @@ struct Edge {
         : from(from), to(to), cost(cost), capacity(capacity) {}
 };
 
-std::pair<bool, std::vector<int>> BellmanFord(std::vector<Edge> const &edges,
-int s, int n) {
-    int INF = std::numeric_limits<int>::max();
-    std::vector<int> d(n, INF);
+pair<bool, vector<int>> BellmanFord(vector<Edge> const &edges, int s, int n) {
+    int INF = numeric_limits<int>::max();
+    vector<int> d(n, INF);
     d[s] = 0;
 
     bool improved = true;
     for (int i = 0; i < n && improved; ++i) {
         improved = false;
         for (Edge const &e : edges) {
-            if (e.capacity > 0 && d[e.from] < INF && d[e.from] + e.cost < d[e.to]) {
+            if (e.capacity > 0 && d[e.from] < INF &&
+                d[e.from] + e.cost < d[e.to]) {
                 d[e.to] = d[e.from] + e.cost;
                 improved = true;
             }
@@ -29,13 +27,13 @@ int s, int n) {
 }
 
 class MinCostMaxFlow {
-public:
-    std::pair<int, int> solve(std::vector<Edge> const &edges, int source,
-                              int sink, int n) {
+  public:
+    pair<int, int> solve(vector<Edge> const &edges, int source, int sink,
+                         int n) {
         int m = (int)edges.size();
-        std::vector<Edge> directed_edges(2 * m);
-        capacity.assign(n, std::vector<int>(n, 0));
-        cost.assign(n, std::vector<int>(n, 0));
+        vector<Edge> directed_edges(2 * m);
+        capacity.assign(n, vector<int>(n, 0));
+        cost.assign(n, vector<int>(n, 0));
         adj.resize(n);
         for (int i = 0; i < m; i++) {
             Edge e = edges[i];
@@ -48,7 +46,8 @@ public:
             adj[e.to].push_back(e.from);
         }
 
-        auto [negative_cycle, distances] = BellmanFord(directed_edges, source, n);
+        auto [negative_cycle, distances] =
+            BellmanFord(directed_edges, source, n);
         assert(!negative_cycle);
         potential = distances;
 
@@ -56,21 +55,20 @@ public:
         int total_cost = 0;
         while (true) {
             auto [distances, parent] = dijkstra(source);
-            if (parent[sink] == -1)
-                break;
+            if (parent[sink] == -1) break;
 
             // fix potentials
             for (int i = 0; i < n; i++) {
-                if (distances[i] < std::numeric_limits<int>::max())
+                if (distances[i] < numeric_limits<int>::max())
                     potential[i] += distances[i];
             }
 
             // augment path
-            int cur_flow = std::numeric_limits<int>::max();
+            int cur_flow = numeric_limits<int>::max();
             int cur = sink;
             while (cur != source) {
                 int prev = parent[cur];
-                cur_flow = std::min(cur_flow, capacity[prev][cur]);
+                cur_flow = min(cur_flow, capacity[prev][cur]);
                 cur = prev;
             }
             cur = sink;
@@ -87,11 +85,11 @@ public:
         return {flow, total_cost};
     }
 
-    std::pair<std::vector<int>, std::vector<int>> dijkstra(int v0) {
+    pair<vector<int>, vector<int>> dijkstra(int v0) {
         int n = adj.size();
-        int INF = std::numeric_limits<int>::max();
-        std::vector<int> distance(n, INF), parent(n, -1);
-        std::priority_queue<std::pair<int, int>> pq;
+        int INF = numeric_limits<int>::max();
+        vector<int> distance(n, INF), parent(n, -1);
+        priority_queue<pair<int, int>> pq;
         pq.push({0, v0});
         distance[v0] = 0;
         while (!pq.empty()) {
@@ -99,11 +97,9 @@ public:
             pq.pop();
             long long dist = -x.first;
             int v = x.second;
-            if (dist > distance[v])
-                continue;
+            if (dist > distance[v]) continue;
             for (auto u : adj[v]) {
-                if (capacity[v][u] == 0)
-                    continue;
+                if (capacity[v][u] == 0) continue;
                 int new_cost = cost[v][u] + potential[v] - potential[u];
                 if (dist + new_cost < distance[u]) {
                     distance[u] = dist + new_cost;
@@ -115,8 +111,8 @@ public:
         return {distance, parent};
     }
 
-private:
-    std::vector<int> potential;
-    std::vector<std::vector<int>> capacity, cost;
-    std::vector<std::vector<int>> adj;
+  private:
+    vector<int> potential;
+    vector<vector<int>> capacity, cost;
+    vector<vector<int>> adj;
 };

@@ -1,5 +1,5 @@
-#include <stack>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Edge {
     int to;
@@ -8,13 +8,13 @@ struct Edge {
 };
 
 int n, m;
-std::vector<std::vector<Edge>> adj;
+vector<vector<Edge>> adj;
 
 int timer;
-std::vector<int> disc, low;
+vector<int> disc, low;
 
-std::vector<std::vector<std::pair<int, int>>> bc_components;
-std::stack<std::pair<int, int>> st;
+vector<vector<pair<int, int>>> bc_components;
+stack<pair<int, int>> st;
 
 void dfs(int v, int p = -1) {
     disc[v] = low[v] = ++timer;
@@ -28,18 +28,18 @@ void dfs(int v, int p = -1) {
             children++;
             st.push({v, u});
             dfs(u, v);
-            low[v] = std::min(low[v], low[u]);
+            low[v] = min(low[v], low[u]);
             if ((p != -1 && low[u] >= disc[v]) || (p == -1 && children > 1)) {
-                std::vector<std::pair<int, int>> component;
+                vector<pair<int, int>> component;
                 do {
                     component.push_back(st.top());
                     st.pop();
-                } while (component.back() != std::make_pair(v, u));
-                bc_components.push_back(std::move(component));
+                } while (component.back() != make_pair(v, u));
+                bc_components.push_back(move(component));
             }
         } else if (disc[u] < disc[v]) {
             st.push({v, u});
-            low[v] = std::min(low[v], disc[u]);
+            low[v] = min(low[v], disc[u]);
         }
     }
 }
@@ -53,12 +53,12 @@ void construct() {
         if (!disc[v]) {
             dfs(v);
             if (!st.empty()) {
-                std::vector<std::pair<int, int>> component;
+                vector<pair<int, int>> component;
                 while (!st.empty()) {
                     component.push_back(st.top());
                     st.pop();
                 }
-                bc_components.push_back(std::move(component));
+                bc_components.push_back(move(component));
             }
         }
     }

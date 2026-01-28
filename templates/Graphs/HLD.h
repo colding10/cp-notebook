@@ -1,7 +1,8 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 class SegmentTree {
-public:
+  public:
     SegmentTree(int count) {
         n = count;
         data.assign(2 * n, 0);
@@ -13,10 +14,8 @@ public:
         right += n;
 
         while (left < right) {
-            if (left & 1)
-                ret = std::max(ret, data[left++]);
-            if (right & 1)
-                ret = std::max(ret, data[--right]);
+            if (left & 1) ret = max(ret, data[left++]);
+            if (right & 1) ret = max(ret, data[--right]);
             left >>= 1;
             right >>= 1;
         }
@@ -29,13 +28,13 @@ public:
 
         while (idx > 1) {
             idx /= 2;
-            data[idx] = std::max(data[idx * 2], data[idx * 2 + 1]);
+            data[idx] = max(data[idx * 2], data[idx * 2 + 1]);
         }
     }
 
-private:
+  private:
     int n;
-    std::vector<int> data;
+    vector<int> data;
 };
 
 enum ValueType { NodeValues = 0, EdgeValues = 1 };
@@ -53,14 +52,14 @@ enum ValueType { NodeValues = 0, EdgeValues = 1 };
  * `v`).
  */
 template <ValueType VT = EdgeValues> class HLD {
-public:
-    HLD(std::vector<std::vector<int>> const &adj, int root = 0)
+  public:
+    HLD(vector<vector<int>> const &adj, int root = 0)
         : adj(adj), n(adj.size()), segtree(n) {
-        parent = std::vector<int>(n);
-        depth = std::vector<int>(n);
-        heavy = std::vector<int>(n, -1);
-        head = std::vector<int>(n);
-        pos = std::vector<int>(n);
+        parent = vector<int>(n);
+        depth = vector<int>(n);
+        heavy = vector<int>(n, -1);
+        head = vector<int>(n);
+        pos = vector<int>(n);
         cur_pos = 0;
 
         dfs(root);
@@ -70,16 +69,15 @@ public:
     }
 
     template <ValueType V1 = VT,
-              typename std::enable_if<V1 == NodeValues, int>::type = 0>
+              typename enable_if<V1 == NodeValues, int>::type = 0>
     void update_node(int v, int val) {
         segtree.update(pos[v], val);
     }
 
     template <ValueType V1 = VT,
-              typename std::enable_if<V1 == EdgeValues, int>::type = 0>
+              typename enable_if<V1 == EdgeValues, int>::type = 0>
     void update_edge(int u, int v, int val) {
-        if (depth[u] > depth[v])
-            std::swap(u, v);
+        if (depth[u] > depth[v]) swap(u, v);
         segtree.update(pos[v], val);
     }
 
@@ -104,36 +102,32 @@ public:
     void decompose(int v, int h) {
         head[v] = h;
         pos[v] = cur_pos++;
-        if (heavy[v] != -1)
-            decompose(heavy[v], h);
+        if (heavy[v] != -1) decompose(heavy[v], h);
         for (int u : adj[v]) {
-            if (u != parent[v] && u != heavy[v])
-                decompose(u, u);
+            if (u != parent[v] && u != heavy[v]) decompose(u, u);
         }
     }
 
     int query_max(int a, int b) {
         int res = 0;
         for (; head[a] != head[b]; b = parent[head[b]]) {
-            if (depth[head[a]] > depth[head[b]])
-                std::swap(a, b);
+            if (depth[head[a]] > depth[head[b]]) swap(a, b);
             int cur_heavy_path = segtree.maximum(pos[head[b]], pos[b] + 1);
-            res = std::max(res, cur_heavy_path);
+            res = max(res, cur_heavy_path);
         }
 
-        if (depth[a] > depth[b])
-            std::swap(a, b);
+        if (depth[a] > depth[b]) swap(a, b);
         int last_heavy_path = segtree.maximum(pos[a] + VT, pos[b] + 1);
-        res = std::max(res, last_heavy_path);
+        res = max(res, last_heavy_path);
         return res;
     }
 
-private:
-    std::vector<std::vector<int>> const &adj;
+  private:
+    vector<vector<int>> const &adj;
     int n;
 
-public:
+  public:
     SegmentTree segtree;
     int cur_pos;
-    std::vector<int> parent, depth, heavy, head, pos;
+    vector<int> parent, depth, heavy, head, pos;
 };

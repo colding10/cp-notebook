@@ -1,4 +1,5 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Edge {
     int to;
@@ -7,28 +8,26 @@ struct Edge {
 };
 
 int n, m;
-std::vector<std::vector<Edge>> adj;
+vector<vector<Edge>> adj;
 
 int timer;
-std::vector<int> disc, low;
-std::vector<bool> bridge, cut;
+vector<int> disc, low;
+vector<bool> bridge, cut;
 
 void dfs(int v, int p = -1) {
     disc[v] = low[v] = ++timer;
     int children = 0;
     for (Edge e : adj[v]) {
         int u = e.to;
-        if (u == p)
-            continue;
+        if (u == p) continue;
 
         if (disc[u]) {
-            low[v] = std::min(low[v], disc[u]);
+            low[v] = min(low[v], disc[u]);
         } else {
             children++;
             dfs(u, v);
-            low[v] = std::min(low[v], low[u]);
-            if (low[u] > disc[v])
-                bridge[e.idx] = true;
+            low[v] = min(low[v], low[u]);
+            if (low[u] > disc[v]) bridge[e.idx] = true;
             if ((p != -1 && low[u] >= disc[v]) || (p == -1 && children > 1))
                 cut[v] = true;
         }
@@ -43,7 +42,6 @@ void find() {
     cut.assign(n, false);
 
     for (int v = 0; v < n; v++) {
-        if (!disc[v])
-            dfs(v);
+        if (!disc[v]) dfs(v);
     }
 }

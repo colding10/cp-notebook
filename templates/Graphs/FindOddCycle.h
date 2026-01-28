@@ -1,14 +1,15 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Edge {
     int from, to, idx;
 };
 
-std::vector<std::vector<Edge>> adj;
+vector<vector<Edge>> adj;
 
-std::vector<int> color;
-std::vector<Edge> odd_cycle;
-std::vector<Edge> pre;
+vector<int> color;
+vector<Edge> odd_cycle;
+vector<Edge> pre;
 
 bool findOddCycle(Edge e = {-1, 0, -1}, int c = 0) {
     int v = e.to;
@@ -21,8 +22,7 @@ bool findOddCycle(Edge e = {-1, 0, -1}, int c = 0) {
 
     if (color[v] >= 0) {
         // even cycle
-        if (color[v] == c)
-            return false;
+        if (color[v] == c) return false;
 
         // odd cycle
         odd_cycle.push_back(e);
@@ -38,10 +38,8 @@ bool findOddCycle(Edge e = {-1, 0, -1}, int c = 0) {
     pre[v] = e;
 
     for (auto f : adj[v]) {
-        if (f.idx == e.idx)
-            continue;
-        if (findOddCycle(f, c ^ 1))
-            return true;
+        if (f.idx == e.idx) continue;
+        if (findOddCycle(f, c ^ 1)) return true;
     }
 
     return false;

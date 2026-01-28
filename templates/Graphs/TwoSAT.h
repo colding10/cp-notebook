@@ -1,4 +1,7 @@
 #include "SCC.h"
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 class TwoSAT {
 public:
@@ -23,5 +26,5 @@ public:
 
     int n;
     SCC scc;
-    std::vector<bool> assignment;
+    vector<bool> assignment;
 };

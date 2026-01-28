@@ -1,15 +1,16 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 class LCA_Binary_Lifting {
-public:
-    LCA_Binary_Lifting(std::vector<std::vector<int>> adj, int root)
+  public:
+    LCA_Binary_Lifting(vector<vector<int>> adj, int root)
         : root(root), adj(adj) {
         int n = adj.size();
 
         log = 1;
         while ((1 << log) < n)
             log++;
-        parents.assign(log, std::vector<int>(n, -1));
+        parents.assign(log, vector<int>(n, -1));
 
         height.resize(n);
         dfs(root, -1, 0);
@@ -32,8 +33,7 @@ public:
     }
 
     int LCA(int u, int v) {
-        if (height[u] < height[v])
-            std::swap(u, v);
+        if (height[u] < height[v]) swap(u, v);
         u = find_parent(u, height[u] - height[v]);
 
         for (int l = log - 1; l >= 0; l--) {
@@ -49,18 +49,18 @@ public:
             return parents[0][u];
     }
 
-private:
+  private:
     void dfs(int v, int p, int h) {
         parents[0][v] = p;
         height[v] = h;
         for (int u : adj[v]) {
-            if (u != p)
-                dfs(u, v, h + 1);
+            if (u != p) dfs(u, v, h + 1);
         }
     }
 
+
     int log;
     int root;
-    std::vector<std::vector<int>> adj, parents;
-    std::vector<int> height;
+    vector<vector<int>> adj, parents;
+    vector<int> height;
 };

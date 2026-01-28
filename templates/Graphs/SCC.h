@@ -1,8 +1,8 @@
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 class SCC {
-public:
+  public:
     SCC(int n) : n(n) {
         adj.resize(n);
         adj_t.resize(n);
@@ -16,8 +16,7 @@ public:
     int solve() {
         visited.assign(n, false);
         for (int i = 0; i < n; ++i) {
-            if (!visited[i])
-                dfs1(i);
+            if (!visited[i]) dfs1(i);
         }
         visited.assign(n, false);
         reverse(order.begin(), order.end());
@@ -51,8 +50,7 @@ public:
     void dfs1(int v) {
         visited[v] = true;
         for (int u : adj[v]) {
-            if (!visited[u])
-                dfs1(u);
+            if (!visited[u]) dfs1(u);
         }
         order.push_back(v);
     }
@@ -62,13 +60,12 @@ public:
         components.back().push_back(v);
         component[v] = c;
         for (int u : adj_t[v]) {
-            if (!visited[u])
-                dfs2(u, c);
+            if (!visited[u]) dfs2(u, c);
         }
     }
 
     int n;
-    std::vector<std::vector<int>> adj, adj_t, components, adj_condensation;
-    std::vector<bool> visited;
-    std::vector<int> order, component;
+    vector<vector<int>> adj, adj_t, components, adj_condensation;
+    vector<bool> visited;
+    vector<int> order, component;
 };

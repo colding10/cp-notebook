@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 // ---
 // Small-to-Large Merging (DSU on Tree / Sack)
 // Use when you need to answer queries about subtrees
@@ -14,15 +17,15 @@ void calc_sizes(int v, int p = -1) {
         if (u == p) continue;
         calc_sizes(u, v);
         subtree_size[v] += subtree_size[u];
-        if (big_child[v] == -1 || subtree_size[u] > subtree_size[big_child[v]]) {
+        if (big_child[v] == -1 ||
+            subtree_size[u] > subtree_size[big_child[v]]) {
             big_child[v] = u;
         }
     }
 }
 
-// Global data structure for current subtree (e.g., map<int,int> cnt for counting colors)
-// map<int, int> cnt;
-// int answer;
+// Global data structure for current subtree (e.g., map<int,int> cnt for
+// counting colors) map<int, int> cnt; int answer;
 
 void add(int v, int p, int x) {
     // Add node v to the data structure

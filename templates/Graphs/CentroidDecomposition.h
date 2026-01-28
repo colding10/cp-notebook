@@ -1,4 +1,6 @@
-// ---
+#include <bits/stdc++.h>
+using namespace std;
+
 struct CentroidDecomposition {
     int n;
     vector<vector<int>> adj;
@@ -7,7 +9,9 @@ struct CentroidDecomposition {
     vector<int> centroid_parent;
     int root;
 
-    CentroidDecomposition(int n) : n(n), adj(n), subtree_size(n), removed(n, false), centroid_parent(n, -1) {}
+    CentroidDecomposition(int n)
+        : n(n), adj(n), subtree_size(n), removed(n, false),
+          centroid_parent(n, -1) {}
 
     void add_edge(int u, int v) {
         adj[u].push_back(v);
@@ -48,5 +52,6 @@ struct CentroidDecomposition {
     }
 
     // Override this to process paths through centroid
-    // Call build() first, then use centroid_parent to traverse up the centroid tree
+    // Call build() first, then use centroid_parent to traverse up the centroid
+    // tree
 };

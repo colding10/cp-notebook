@@ -1,15 +1,16 @@
 #include "UnionFind.h"
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 struct Edge {
     int u, v, w;
     bool used = false;
 };
 
-int MST_Kruskal(std::vector<Edge> edges, int nodes) {
+int MST_Kruskal(vector<Edge> edges, int nodes) {
     sort(edges.begin(), edges.end(),
-    [](Edge const &e, Edge const &f) {
-        return e.w < f.w;
-    });
+         [](Edge const &e, Edge const &f) { return e.w < f.w; });
 
     UnionFind uf(nodes);
     int cost = 0;

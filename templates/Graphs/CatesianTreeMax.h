@@ -1,21 +1,20 @@
-#include <stack>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
-int CatesianTreeMax(std::vector<int> const &A, std::vector<int> &parent,
-                    std::vector<std::vector<int>> &adj) {
+int CatesianTreeMax(vector<int> const &A, vector<int> &parent,
+                    vector<vector<int>> &adj) {
     int N = A.size();
     parent.assign(N, -1);
-    std::stack<int> s;
+    stack<int> s;
     for (int i = 0; i < N; i++) {
         int last = -1;
         while (!s.empty() && A[s.top()] <= A[i]) {
             last = s.top();
             s.pop();
         }
-        if (!s.empty())
-            parent[i] = s.top();
-        if (last >= 0)
-            parent[last] = i;
+        if (!s.empty()) parent[i] = s.top();
+        if (last >= 0) parent[last] = i;
         s.push(i);
     }
 
