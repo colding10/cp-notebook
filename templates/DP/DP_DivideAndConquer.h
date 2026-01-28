@@ -28,7 +28,7 @@ int main() {
     int n = 4000, K = 20;
     dp[0][0] = 0;
     for (int i = 1; i <= n; i++)
-        dp[0][i] = std::numeric_limits<int>::max() / 2;
+        dp[0][i] = numeric_limits<int>::max() / 2;
 
     for (int k = 1; k <= K; k++) {
         solve(k, 1, n, 1, n);

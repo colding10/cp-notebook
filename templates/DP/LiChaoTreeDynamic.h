@@ -17,7 +17,7 @@ class LiChaoNode {
         int m = (l + r) / 2;
         bool left_smaller = new_line.eval(l) < line.eval(l);
         bool middle_smaller = new_line.eval(m) < line.eval(m);
-        if (middle_smaller) std::swap(line, new_line);
+        if (middle_smaller) swap(line, new_line);
 
         if (r - l == 1) return;
 
@@ -61,7 +61,7 @@ class LiChaoNode {
 class LiChaoTree {
   public:
     LiChaoTree(int mi, int ma) : mi(mi), ma(ma) {
-        root = new LiChaoNode({0, std::numeric_limits<ll>::max() / 2});
+        root = new LiChaoNode({0, numeric_limits<ll>::max() / 2});
     }
 
     ~LiChaoTree() { root->extinguish(); }

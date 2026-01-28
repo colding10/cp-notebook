@@ -12,7 +12,7 @@ struct Line {
 class LiChaoTree {
   public:
     LiChaoTree(int n) : n(n) {
-        inf = {0LL, std::numeric_limits<ll>::max() / 2};
+        inf = {0LL, numeric_limits<ll>::max() / 2};
         lines.resize(4 * n);
         reset();
     }
@@ -25,7 +25,7 @@ class LiChaoTree {
         int m = (l + r) / 2;
         bool left = new_line.eval(l) < lines[id].eval(l);
         bool middle = new_line.eval(m) < lines[id].eval(m);
-        if (middle) std::swap(lines[id], new_line);
+        if (middle) swap(lines[id], new_line);
 
         if (r - l == 1) return;
 
@@ -43,12 +43,12 @@ class LiChaoTree {
 
         int m = (l + r) / 2;
         if (x < m)
-            return std::min(seg_value, get_minimum(x, id << 1, l, m));
+            return min(seg_value, get_minimum(x, id << 1, l, m));
         else
-            return std::min(seg_value, get_minimum(x, id << 1 | 1, m, r));
+            return min(seg_value, get_minimum(x, id << 1 | 1, m, r));
     }
 
     int n;
-    std::vector<Line> lines;
+    vector<Line> lines;
     Line inf;
 };
