@@ -1,4 +1,5 @@
-#include <array>
+#include <bits/stdc++.h>
+using namespace std;
 
 template <typename T> class TwoThreeTreeNode {
   public:
@@ -13,7 +14,7 @@ template <typename T> class TwoThreeTreeNode {
             elements[size] = elem;
             for (int i = size - 1; i >= 0; i--) {
                 if (elements[i] > elements[i + 1])
-                    std::swap(elements[i], elements[i + 1]);
+                    swap(elements[i], elements[i + 1]);
             }
             size++;
         } else {
@@ -64,9 +65,9 @@ template <typename T> class TwoThreeTreeNode {
 
     bool isLeaf() { return children[0] == nullptr; }
 
-    std::array<T, 3> elements;
+    array<T, 3> elements;
     int size;
-    std::array<TwoThreeTreeNode<T> *, 4> children;
+    array<TwoThreeTreeNode<T> *, 4> children;
 };
 
 template <typename T> class TwoThreeTree {

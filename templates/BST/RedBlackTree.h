@@ -1,4 +1,3 @@
-
 template <typename T> class RedBlackTreeNode {
   public:
     RedBlackTreeNode(T elem)
