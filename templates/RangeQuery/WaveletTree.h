@@ -1,9 +1,9 @@
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 class WaveletTree {
-public:
-    WaveletTree(std::vector<int> &v, int size) : s(size), nodes(2 * size) {
+  public:
+    WaveletTree(vector<int> &v, int size) : s(size), nodes(2 * size) {
         build(v.begin(), v.end(), 0, s - 1, 1);
     }
 
@@ -26,15 +26,14 @@ public:
         return L;
     }
 
-private:
+  private:
     int s;
-    std::vector<std::vector<int>> nodes;
+    vector<vector<int>> nodes;
 
-    using iter = std::vector<int>::iterator;
+    using iter = vector<int>::iterator;
 
     void build(iter b, iter e, int L, int U, int idx) {
-        if (L == U)
-            return;
+        if (L == U) return;
         int M = (L + U) / 2;
 
         nodes[idx].resize(distance(b, e) + 1);
@@ -45,9 +44,7 @@ private:
             i++;
         }
 
-        iter p = std::stable_partition(b, e, [M](int i) {
-            return i <= M;
-        });
+        iter p = stable_partition(b, e, [M](int i) { return i <= M; });
 
         build(b, p, L, M, idx * 2);
         build(p, e, M + 1, U, idx * 2 + 1);

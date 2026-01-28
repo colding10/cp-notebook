@@ -1,9 +1,9 @@
-#include <deque>
-#include <limits>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Node;
 
-std::deque<Node> cache;
+deque<Node> cache;
 
 Node *fetch_new() {
     cache.emplace_back();
@@ -18,7 +18,7 @@ Node *fetch_new(Node const &node) {
 struct Node {
     Node *left = nullptr;
     Node *right = nullptr;
-    int data = std::numeric_limits<int>::max();
+    int data = numeric_limits<int>::max();
 
     void build(int l, int r) {
         if (l + 1 < r) {
@@ -41,19 +41,17 @@ struct Node {
                 neww->left = neww->left->set(pos, x, l, m);
             else
                 neww->right = neww->right->set(pos, x, m, r);
-            neww->data = std::min(neww->left->data, neww->right->data);
+            neww->data = min(neww->left->data, neww->right->data);
         }
         return neww;
     }
 
     int min(int bl, int br, int l, int r) {
-        if (bl >= r || br <= l)
-            return std::numeric_limits<int>::max();
+        if (bl >= r || br <= l) return numeric_limits<int>::max();
 
-        if (bl <= l && r <= br)
-            return data;
+        if (bl <= l && r <= br) return data;
 
         int m = (l + r) / 2;
-        return std::min(left->min(bl, br, l, m), right->min(bl, br, m, r));
+        return min(left->min(bl, br, l, m), right->min(bl, br, m, r));
     }
 };

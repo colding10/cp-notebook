@@ -1,5 +1,6 @@
-#include <limits>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 class SegmentTree {
 public:
@@ -8,10 +9,10 @@ public:
         data.assign(2 * n, 0);
     }
 
-    SegmentTree(std::vector<int> const &values) {
+    SegmentTree(vector<int> const &values) {
         n = values.size();
         data.resize(2 * n);
-        std::copy(values.begin(), values.end(), &data[0] + n);
+        copy(values.begin(), values.end(), &data[0] + n);
         for (int idx = n - 1; idx > 0; idx--)
             data[idx] = data[2 * idx] + data[2 * idx + 1];
     }
@@ -44,5 +45,5 @@ public:
 
 private:
     int n;
-    std::vector<int> data;
+    vector<int> data;
 };

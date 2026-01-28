@@ -1,21 +1,20 @@
-#include <functional>
-#include <limits>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 template <typename Segment> class SegmentTree {
-public:
-    using CombineFkt = std::function<Segment(Segment, Segment)>;
+  public:
+    using CombineFkt = function<Segment(Segment, Segment)>;
 
     SegmentTree(int count, CombineFkt combine) : combine{combine} {
         n = count;
         data.resize(2 * n);
     }
 
-    SegmentTree(std::vector<Segment> const &values, CombineFkt combine)
+    SegmentTree(vector<Segment> const &values, CombineFkt combine)
         : combine{combine} {
         n = values.size();
         data.resize(2 * n);
-        std::copy(values.begin(), values.end(), &data[n]);
+        copy(values.begin(), values.end(), &data[n]);
         for (int idx = n - 1; idx > 0; idx--)
             data[idx] = combine(data[idx * 2], data[idx * 2 + 1]);
     }
@@ -34,24 +33,21 @@ public:
         left += n;
         right += n;
 
-        if (left + 1 == right)
-            return data[left];
+        if (left + 1 == right) return data[left];
 
         Segment ret_l = data[left++], ret_r = data[--right];
 
         while (left < right) {
-            if (left & 1)
-                ret_l = combine(ret_l, data[left++]);
-            if (right & 1)
-                ret_r = combine(data[--right], ret_r);
+            if (left & 1) ret_l = combine(ret_l, data[left++]);
+            if (right & 1) ret_r = combine(data[--right], ret_r);
             left >>= 1;
             right >>= 1;
         }
         return combine(ret_l, ret_r);
     }
 
-private:
+  private:
     int n;
-    std::vector<Segment> data;
+    vector<Segment> data;
     CombineFkt combine;
 };

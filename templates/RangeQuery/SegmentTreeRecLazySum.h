@@ -1,24 +1,24 @@
-#include <limits>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 class SegmentTreeRecLazy {
-public:
+  public:
     SegmentTreeRecLazy(int n) : n(n) {
         data.assign(4 * n, 0);
         todo.assign(4 * n, 0);
     }
 
-    SegmentTreeRecLazy(std::vector<long long> const &v) {
+    SegmentTreeRecLazy(vector<ll> const &v) {
         n = v.size();
         data.assign(4 * n, 0);
         todo.assign(4 * n, 0);
         build(v);
     }
 
-    void build(std::vector<long long> const &v, int id = 1, int l = 0,
+    void build(vector<ll> const &v, int id = 1, int l = 0,
                int r = -1) {
-        if (r == -1)
-            r = n;
+        if (r == -1) r = n;
 
         if (l == r - 1) {
             data[id] = v[l];
@@ -30,9 +30,8 @@ public:
         }
     }
 
-    long long sum(int x, int y, int id = 1, int l = 0, int r = -1) {
-        if (r == -1)
-            r = n;
+    ll sum(int x, int y, int id = 1, int l = 0, int r = -1) {
+        if (r == -1) r = n;
 
         if (x >= r || y <= l) {
             return 0;
@@ -45,9 +44,9 @@ public:
         }
     }
 
-    void add(int x, int y, long long addend, int id = 1, int l = 0, int r = -1) {
-        if (r == -1)
-            r = n;
+    void add(int x, int y, ll addend, int id = 1, int l = 0,
+             int r = -1) {
+        if (r == -1) r = n;
 
         if (x >= r || y <= l) {
         } else if (x <= l && r <= y) {
@@ -62,7 +61,7 @@ public:
         }
     }
 
-private:
+  private:
     void push(int id, int l, int r) {
         int m = (l + r) >> 1;
         data[id << 1] += todo[id] * (m - l);
@@ -73,5 +72,5 @@ private:
     }
 
     int n;
-    std::vector<long long> data, todo;
+    vector<ll> data, todo;
 };

@@ -1,5 +1,4 @@
-#include <vector>
-#include <cassert>
+#include <bits/stdc++.h>
 using namespace std;
 
 template <class T> struct RMQ {

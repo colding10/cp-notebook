@@ -1,4 +1,5 @@
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Node {
     int data = 0;
@@ -8,7 +9,7 @@ struct Node {
 };
 
 class SegmentTreeRec {
-public:
+  public:
     SegmentTreeRec(int n) : n(n) {
         nodes.reserve(15000010);
         auto start = createNode();
@@ -23,11 +24,9 @@ public:
 
     void update(int l, int r, int val, Node *cur = nullptr, int seg_l = 0,
                 int seg_r = -1) {
-        if (seg_r == -1)
-            seg_r = n;
+        if (seg_r == -1) seg_r = n;
 
-        if (seg_r <= l || seg_l >= r)
-            return;
+        if (seg_r <= l || seg_l >= r) return;
 
         if (l <= seg_l && r >= seg_r) {
             cur->data = val;
@@ -35,10 +34,8 @@ public:
             return;
         }
 
-        if (cur->L == nullptr)
-            cur->L = createNode();
-        if (cur->R == nullptr)
-            cur->R = createNode();
+        if (cur->L == nullptr) cur->L = createNode();
+        if (cur->R == nullptr) cur->R = createNode();
 
         int seg_m = seg_l + (seg_r - seg_l) / 2;
         if (cur->todo == 1) {
@@ -62,7 +59,7 @@ public:
     }
 
     int n;
-    std::vector<Node> nodes;
+    vector<Node> nodes;
     Node *start;
     int nodeCnt = 0;
 };
