@@ -14,6 +14,9 @@ I will also be adding tools, resources, and such as I find and use them.
 
 Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with a package manager of your choice.
 
+ gcc-pragmas.cpp  preamble.cpp  template-minimal.cpp
+ grid-dydx.cpp  setio.cpp  template-multiTC.cpp
+
 ## Project structure
 
 ```zsh
@@ -36,11 +39,11 @@ Clone this repo, take the `nvim-plugin` folder, and install it to (neo)vim with 
 │
 └── templates                     [where i keep my templates]
     ├── Main                      [generic templates]
-    │   ├── basic_types.h
-    │   ├── ckmin_max.h
-    │   ├── long-template.cpp
-    │   ├── minimal-template.cpp
-    │   ├── short-template.cpp
-    │   └── vector_types.h
+    │   ├── preamble.cpp
+    │   ├── setio.cpp
+    │   ├── template-minimal.cpp
+    │   ├── template-multiTC.cpp
+    │   ├── grid-dydx.cpp
+    │   ├── setio.cpp
     └── Etc....                   [and a bunch of other folders w/ code]
 ```
